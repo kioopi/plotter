@@ -1,4 +1,3 @@
-# Create your views here.
 from models import Termin, Category
 
 from django.views.generic.date_based import object_detail, archive_month, archive_day  
@@ -7,6 +6,8 @@ from django.views.generic.date_based import archive_month
 def month(request, **kwargs): 
     """ uses the date-based generic view archive_month, but filters the queryset 
         by category
+
+        uses all the same parameters as archive_month from the url-conf  
     """
     year = kwargs.pop('year') 
     month = kwargs.pop('month') 
@@ -25,8 +26,10 @@ def month(request, **kwargs):
 
 
 def day(request, **kwargs): 
-    """ uses the date-based generic view archive_month, but filters the queryset 
+    """ uses the date-based generic view archive_day, but filters the queryset 
         by category
+
+        uses all the same parameters as archive day from the url-conf  
     """
     year = kwargs.pop('year') 
     month = kwargs.pop('month') 
