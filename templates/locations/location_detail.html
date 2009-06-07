@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+
+{% block bodyclass %}gruppen{% endblock %}
+
+{% block content %} 
+<div class="location"> 
+   <h2>{{ object.name }}</h2> 
+   <div class="adress"> 
+    </div>{{ object.adress }} </div>
+    <div>{{ object.zipcode }}, {{ object.city}} </div>
+   </div>
+  
+   <p>{{ object.text }}</p> 
+
+   <ul> 
+   {% for termin in object.upcoming_termine %} 
+     <li>
+     {{ termin.startdate|date:"d.m.Y" }} - <a href="{{ termin.get_absolute_url }}">{{ termin.summary }}</a> 
+     </li> 
+   {% endfor %} 
+   </ul> 
+</div> 
+
+{% endblock %} 

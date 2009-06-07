@@ -1,0 +1,40 @@
+8
+
+dir
+15
+http://mapstraction.googlecode.com/svn/trunk
+http://mapstraction.googlecode.com/svn
+
+
+
+2009-06-02T11:10:54.092711Z
+15
+robert.moran
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+5785637c-5c24-0410-85b3-eb650f34d106
+
+source
+dir
+
+tools
+dir
+
+tests
+dir
+
+examples
+dir
+

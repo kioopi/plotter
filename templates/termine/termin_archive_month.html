@@ -1,0 +1,21 @@
+{% extends "termine/termine.html" %}
+
+
+{% block content %}
+  <ul>
+  {% for object in object_list %} 
+   <li class="termin"> 
+     <div class="termin-header"> 
+     {% include "termine/termin_header.html" %} 
+     </div> 
+
+   <p class="description">
+   </p> 
+   
+   {% include "termine/termin_footer.html" %} 
+
+   </li> 
+  {% endfor %} 
+  </ul> 
+{% endblock %} 
+

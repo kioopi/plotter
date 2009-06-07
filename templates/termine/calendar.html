@@ -1,0 +1,32 @@
+{# this is for the inclusion-tag month-cal #}
+<div class="month_cal">
+<h3><a href="/termine/{{ this|date:"Y-n" }}/">_{{ this|date:"F" }}</a></h3>
+<div class="cal">
+<table>
+<tr>
+{% for day in headers %}
+<th>{{ day|date:"D"|slice:":2" }}</th>
+{% endfor %}
+</tr>
+{% for week in calendar %}
+<tr>
+{% for day in week %}
+<td ><div class="calendarcell {{ day.cssclass }} {% if not day.in_month %}  nonmonth{% endif %}">
+{% if day.link %}<a href="{{ day.link  }}">{% endif %}{{ day.day|date:"d" }}
+{% if day.link %}</a>{% endif %}</div>
+</td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</div>
+<a id="cal_prev" href="/termine/{{ prev|date:"Y-n" }}/">&lt; {{ prev|date:"F" }}</a> 
+<a id="cal_next" href="/termine/{{ next|date:"Y-n" }}/">{{ next|date:"F" }} &gt; </a>
+</div>
+
+
+<!--
+<h3><a id="cal_prev" href="/dates/{{ prev|date:"Y-m" }}/">&lt;</a> 
+{{ this|date:"F" }}
+<a id="cal_next" href="/dates/{{ next|date:"Y-m" }}/">&gt;</a></h3>
+-->

@@ -1,0 +1,48 @@
+{% extends "admin/change_form.html" %} 
+
+{% load locations_tags %} 
+
+{% block extrahead %} 
+
+<script type="text/javascript" src="/sitemedia/js/dojo/dojo.js"></script>  
+<script src="http://openlayers.org/api/OpenLayers.js"></script> 
+<script type="text/javascript" src="/sitemedia/js/mapstraction.js"></script>  
+
+<script type="text/javascript">
+dojo.addOnLoad(function(){
+
+
+  
+
+  // the map 
+  var mapstraction = new Mapstraction('mapstraction','openlayers');
+  // get lat, lon 
+  var lat = parseFloat(document.getElementById('id_lat').value); 
+  var lon = parseFloat(document.getElementById('id_long').value); 
+ 
+  if( lat && lon ){
+
+     var firstPoint = new LatLonPoint(lat,lon);
+     mapstraction.setCenterAndZoom(firstPoint, 15);
+
+     // add marker
+     mapstraction.addMarker(new Marker(firstPoint)); 
+
+     mapstraction.addEventListener('click', function(p) { alert('Mapstraction Event Handling - Mouse clicked at ' + p)  });
+
+  } 
+
+});
+
+</script> 
+
+
+{% endblock %} 
+
+{% block after_field_sets %}
+{% if object_id %} 
+  <div id="mapstraction" style="width: 600px; height: 200px; border:1px solid black;"></div>
+{% endif %} 
+
+{{ object.name }} 
+{% endblock %}

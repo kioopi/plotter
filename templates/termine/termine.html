@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load termine_tags %}
+
+
+{% block bodyclass %}termine{% endblock %}
+
+
+{% block content %} 
+{% endblock %}  
+
+{% block sidebar %} 
+    {% if month %} 
+     <li class="info"><div>Termine im {{ month|date:"F Y" }}{% if cat %} in der Kategorie {{ cat }}{% endif %}. 
+     </div></li> 
+     <li>{% month_cal month.year month.month %}</li>
+     <li>{% catlist month.year month.month %}</li> 
+    {% else %} 
+      {% if day %} 
+      <li class="info"><div>Termine am  {{ day|date:"d F Y" }}{% if cat %} in der Kategorie {{ cat }}{% endif %}. 
+      </div></li> 
+       <li> {% month_cal day.year day.month %}</li>
+       <li>{% catlist day.year day.month day.day  %}</li> 
+      {% else %} 
+       <li> {% month_cal object.startdate.year object.startdate.month %} </li>
+
+      {% endif %} 
+    {% endif %} 
+     
+{% endblock %} 

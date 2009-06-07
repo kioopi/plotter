@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+                <title>Plotter</html> 
+  <link rel="stylesheet" type="text/css" href="/sitemedia/css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="/sitemedia/css/base.css" />
+  {% block extrahead %}{% endblock extrahead %} 
+
+
+</head> 
+<body class="{% block bodyclass %}{% endblock %}">
+   <h1>Plotter</h1> 
+   <ul id="mainnav"> 
+     <li><a class="termine" href="/termine/">Termine</a></li>  
+     <li><a class="gruppen" href="/gruppen/">Gruppen</a></li>  
+     <li><a class="links" href="/links/">Links</a></li>  
+     <li><a class="about" href="/about/">About</a></li>  
+     <li><a class="print" href="/print/">Print</a></li>  
+     <li><a class="regulars" href="/regulars/">Regulars</a></li>  
+     <li><a class="orte" href="/orte/">Orte</a></li>  
+     <li><a class="sisters" href="/sisters/">Sisters</a></li>  
+     <li><a class="edit" href="/edit/">Edit/Post</a></li>  
+   </ul> 
+   <div id="content"> 
+{% block content %} 
+
+{% endblock %} 
+   </div> 
+
+<ul id="sidebar">
+{% block sidebar %}
+{% endblock %}
+</ul>
+
+
+
+{% if debug %} 
+<br /><hr style="clear:both;" /> 
+  {{ sql_queries|length }} Queries.
+  <hr />
+  <ul> 
+  {% for query in sql_queries %} 
+  <li>{{ query.sql }} -- {{ query.time }} <hr /> </li>  
+  {% endfor %} 
+  </ul> 
+<hr /> 
+
+{% endif  %} 
+
+</body>
+</html>

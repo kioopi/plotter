@@ -1,0 +1,11 @@
+       <div class="dtstart" title="">{{ object.startdate|date:"D. d.M.y" }} <span class="time">{{ object.starttime|time:"H:i" }}</span></div>
+       <div class="daynumber">{{ object.startdate|date:"d" }}</div> 
+
+       <a class="summary" href="{{ object.get_absolute_url }}">{{ object.summary }}</a>
+       <ul class="categories">
+         {% for cat in object.categories.all %}
+         <li>{{ cat.name }}</li>
+         {% endfor %}
+       </ul>
+
+
