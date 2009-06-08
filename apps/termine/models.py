@@ -12,6 +12,8 @@ from django.contrib.auth.models import User
 
 from organizers.models import Organizer
 from locations.models import  Location
+
+from dateutil import rrule 
  
 
 class Category(models.Model):
@@ -217,9 +219,9 @@ class RecurringTermin(BaseTermin):
 
     def generate_dates(self):
         """Creates upcoming instances for this rule.""" 
-        for d in self.get_rrule():
+        for d in self.rrule():
             d = datetime.date(d)
-            self.create_instace(d)
+            self.create_instance(d)
 
 
 

@@ -31,16 +31,20 @@ this_month_dict['month'] = td.month
 urlpatterns = patterns('',
   # einzerlner termin
   # wird durch datum und slug identifiziert
+  # /termine/2009-07-22/terminslug/ 
   url(r'^(?P<year>\d{4})-(?P<month>\d{1,2})-(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$', 'django.views.generic.date_based.object_detail', termine_detail_dict, name="termin_detail" ) ,
   #url(r'^(?P<year>\d{4})-(?P<month>\d{1,2})-(?P<day>\d{1,2})/(?P<slug>[-\w]+)/$', 'apps.termine.views.detail', name="termin_detail" ) ,
 
+  # --------------------------------------------------
   # termine eines monats 
+  # /termine/2009-07-22/
    url(
      r'(?P<year>\d{4})-(?P<month>\d{1,2})/$',
      'django.views.generic.date_based.archive_month', 
      termine_month_dict,
    ),
    # termine eines monats, mit filterung nach category
+   # /termine/2009-07-22/cat/catname/
    url(
      r'(?P<year>\d{4})-(?P<month>\d{1,2})/cat/(?P<cat>[-\w]+)/$',
      'apps.termine.views.month',
@@ -49,10 +53,13 @@ urlpatterns = patterns('',
 
 
 
+  # --------------------------------------------------
   # termine eines tages
   # es wird das gleiche template wie fuer das monatsarchiv verwendet 
+  # /termine/2009-07-22/
   url(r'^(?P<year>\d{4})-(?P<month>\d{1,2})-(?P<day>\d{1,2})/$', 'django.views.generic.date_based.archive_day', termine_month_dict ),
 
+  # /termine/2009-07-22/cat/catname/ 
   url(r'^(?P<year>\d{4})-(?P<month>\d{1,2})-(?P<day>\d{1,2})/cat/(?P<cat>[-\w]+)/$', 'apps.termine.views.day', termine_month_dict ),
 
 
@@ -61,11 +68,15 @@ urlpatterns = patterns('',
   # umleitung von /termin
   
   url(r'^$',   
-     'django.views.generic.date_based.archive_month', 
+    'django.views.generic.date_based.archive_month', 
      this_month_dict,
   ) 
- 
-
- 
-
 ) 
+
+# pattern for extending the admin interface 
+urlpatterns += patterns('',
+   # /termine/rules/12/preview/ 
+   url(r'^rules/(?P<id>\d+)/preview/$',   
+    'apps.termine.adminviews.rule_preview', 
+  ) 
+)

@@ -1,8 +1,7 @@
 from models import Termin, Category
 
-from django.views.generic.date_based import object_detail, archive_month, archive_day  
+from django.views.generic.date_based import  archive_month, archive_day  
 
-from django.views.generic.date_based import archive_month
 def month(request, **kwargs): 
     """ uses the date-based generic view archive_month, but filters the queryset 
         by category

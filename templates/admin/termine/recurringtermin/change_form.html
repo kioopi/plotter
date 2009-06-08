@@ -1,0 +1,40 @@
+{% extends "admin/change_form.html" %} 
+
+{% block extrahead %} 
+
+<script type="text/javascript" src="/sitemedia/js/dojo/dojo.js"></script>  
+
+{% if object_id %} 
+<script type="text/javascript">
+dojo.addOnLoad(function(){
+
+  dojo.xhrGet({
+    url : "/termine/rules/{{ object_id }}/preview/",
+    load : function(response, ioArgs) {
+        /* Handle a successful callback here */
+        dojo.byId("dates-preview").innerHTML=response;
+    },
+    error : function(response, ioArgs) {
+        /* Handle any errors that occur here */
+        return response;
+    }
+  });
+
+  
+
+});
+
+</script> 
+{% endif %} 
+
+
+{% endblock %} 
+
+{% block after_field_sets %}
+{% if object_id %} 
+  <h3>Termine Preview</h3> 
+  <div id="dates-preview"></div>
+{% endif %} 
+
+{{ object.name }} 
+{% endblock %}
