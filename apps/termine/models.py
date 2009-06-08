@@ -35,7 +35,7 @@ class Category(models.Model):
 
 class BaseTermin(models.Model): 
     """BaseTermin is an abstract model to DRY the date-payload in an actual
-       Termin and the rule for recurring dates (Regular)"""
+       Termin and the rule for recurring dates (RecurringTermin)"""
 
     starttime    = models.TimeField("Uhrzeit", blank=True, null=True)
     summary      = models.CharField("Titel", unique_for_date='startdate', max_length=250)
@@ -55,13 +55,13 @@ class BaseTermin(models.Model):
         abstract=True
 
 class Termin(BaseTermin):
-    """Represents one Date in the Calendar. Is derived from BaseTermin to ensure consistancy with Regular"""
+    """Represents one Date in the Calendar. Is derived from BaseTermin to ensure consistancy with RecurringTermin"""
 
     startdate    = models.DateField("Datum")
     enddate      = models.DateTimeField("Enddatum und Uhrzeit", blank=True, null=True)
     slug = models.SlugField(unique_for_date='startdate')
 
-    rule = models.ForeignKey("Regular", blank=True, null=True, related_name="instances")
+    rule = models.ForeignKey("RecurringTermin", blank=True, null=True, related_name="instances")
 
     publish = models.BooleanField("Veroeffentlichen",default=True)
 
@@ -212,7 +212,6 @@ class RecurringTermin(BaseTermin):
         kwargs['interval'] = int(self.interval)
 
         # TODO filtering by weekday goes here. 
-      
         return rrule.rrule(int(self.frequency), **kwargs)
 
 

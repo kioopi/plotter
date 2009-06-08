@@ -9,6 +9,7 @@ class Migration:
         
         # Adding model 'Organizer'
         db.create_table('organizers_organizer', (
+            ('url', models.URLField(null=True, blank=True)),
             ('slug', models.SlugField()),
             ('description', models.TextField('Text', blank=True)),
             ('id', models.AutoField(primary_key=True)),
@@ -31,7 +32,8 @@ class Migration:
             'description': ('models.TextField', ["'Text'"], {'blank': 'True'}),
             'id': ('models.AutoField', [], {'primary_key': 'True'}),
             'name': ('models.CharField', [], {'max_length': '100'}),
-            'slug': ('models.SlugField', [], {})
+            'slug': ('models.SlugField', [], {}),
+            'url': ('models.URLField', [], {'null': 'True', 'blank': 'True'})
         }
     }
     
