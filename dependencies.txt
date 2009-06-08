@@ -1,3 +1,9 @@
 
-
+== python libraries == 
   * geopy 
+  * python-dateutil [http://labix.org/python-dateutil]
+
+
+== django apps == 
+  * django-south [http://github.com/andrewgodwin/south/tree/master] 
+  * django-extensions

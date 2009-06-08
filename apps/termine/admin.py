@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Category, Termin
+from models import Category, Termin, RecurringTermin
 
 class TerminAdmin(admin.ModelAdmin):
     list_display = ('summary','startdate', 'publish')
@@ -18,10 +18,8 @@ class TerminAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
-
-class RegularAdmin(admin.ModelAdmin):
+class RecurringTerminAdmin(admin.ModelAdmin):
     list_display = ('name','rule_description' )
-    #list_filter = ('startdate', 'publish')
     search_fields = ('name', 'summary', 'description')
     fieldsets = (
       (None, {'fields':('name','rule_description')}),
@@ -30,11 +28,9 @@ class RegularAdmin(admin.ModelAdmin):
       (None, {'fields': ('starttime', 'duration', 'summary',)}),
       (None, {'fields': ('description', 'organizers', 'location')}),
       (None, {'fields': ('categories',)}),
-      #('Webinfo', {'fields': ('webresources',)}),
     )
-
-
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Termin, TerminAdmin)
+admin.site.register(RecurringTermin, RecurringTerminAdmin)
 
