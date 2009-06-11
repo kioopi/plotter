@@ -201,9 +201,7 @@ class RecurringTermin(BaseTermin):
         for c in self.categories.all():  
             t.categories.add(c) 
         
-
-
-        # set the 
+        # set the last_created field to the new generated date
         if not self.last_created or self.last_created.startdate < t.startdate:
             self.last_created = t
             self.save() 
@@ -212,6 +210,24 @@ class RecurringTermin(BaseTermin):
         return t
 
 
+    def string_to_weekday_obj(self, wstr):  
+        """""" 
+        WD_CONSTANTS = (MO, TU, WE, TH, FR, SA, SO )
+       
+        # if weekday was passed in as a two-char-abbr
+        if wstr.upper() in WD_CONSTANTS: 
+            return getattr(dateutil.rrule, wstr.upper()) 
+
+        try: 
+           # if weekday was a number 0=monday 
+           return getattr(dateutil.rrule, WD_CONSTANTS(int(wstr))) 
+        except ValueError: 
+           # if weekday came as constant with parameter MO(2) 
+           wd, num = wstr.split('(') 
+           num = int(num[:-1]) # cut off the last char  )  and convert to int
+           return getattr(datetutil.rrule, wd.upper())(num)
+           
+   
 
     def get_rrule(self, end=False): 
         """Returns an rrule object for this rule. """ 
@@ -238,7 +254,17 @@ class RecurringTermin(BaseTermin):
         # interval
         kwargs['interval'] = int(self.interval)
 
-        # TODO filtering by weekday goes here. 
+        # byweekday field is a little weird
+        # different kinds of input are accepted
+        # numbers:   0, 3, 4
+        # constants  MO, TH, FR
+        # constats with params:  MO(1), TH(10), FR(-1) 
+        if self.byweekday: 
+            by_wd = [] 
+            for wd in self.byweekday.split(','):  
+               by_wd.append(self.string_to_weekday_obj(wd)) 
+            kwargs['byweekday'] = by_wd   
+                
         return rrule.rrule(int(self.frequency), **kwargs)
     rrule = property(get_rrule) 
 
