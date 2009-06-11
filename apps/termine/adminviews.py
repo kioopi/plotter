@@ -17,3 +17,11 @@ def rule_preview(request, id):
     html = '<ul><li>%s</li></ul>' % '</li><li>'.join([d.strftime('%A %d.%m.%Y') for d in rule])
     return HttpResponse(html)
 
+
+def create_instances(request, id): 
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect('/admin/')
+
+    rt = get_object_or_404(RecurringTermin, pk = int(id))
+    rt.generate_dates() 
+
