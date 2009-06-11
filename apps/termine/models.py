@@ -212,20 +212,20 @@ class RecurringTermin(BaseTermin):
 
     def string_to_weekday_obj(self, wstr):  
         """""" 
-        WD_CONSTANTS = (MO, TU, WE, TH, FR, SA, SO )
+        WD_CONSTANTS = ('MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SO' )
        
         # if weekday was passed in as a two-char-abbr
         if wstr.upper() in WD_CONSTANTS: 
-            return getattr(dateutil.rrule, wstr.upper()) 
+            return getattr(rrule, wstr.upper()) 
 
         try: 
            # if weekday was a number 0=monday 
-           return getattr(dateutil.rrule, WD_CONSTANTS(int(wstr))) 
+           return getattr(rrule, WD_CONSTANTS(int(wstr))) 
         except ValueError: 
            # if weekday came as constant with parameter MO(2) 
            wd, num = wstr.split('(') 
            num = int(num[:-1]) # cut off the last char  )  and convert to int
-           return getattr(datetutil.rrule, wd.upper())(num)
+           return getattr(rrule, wd.upper())(num)
            
    
 
@@ -262,7 +262,8 @@ class RecurringTermin(BaseTermin):
         if self.byweekday: 
             by_wd = [] 
             for wd in self.byweekday.split(','):  
-               by_wd.append(self.string_to_weekday_obj(wd)) 
+               by_wd.append(self.string_to_weekday_obj(wd.strip())) 
+            print by_wd
             kwargs['byweekday'] = by_wd   
                 
         return rrule.rrule(int(self.frequency), **kwargs)

@@ -13,7 +13,7 @@ def rule_preview(request, id):
         return HttpResponseRedirect('/admin/')
 
     rt = get_object_or_404(RecurringTermin, pk = int(id))
-    rule = rt.rrule() 
+    rule = rt.rrule
     html = '<ul><li>%s</li></ul>' % '</li><li>'.join([d.strftime('%A %d.%m.%Y') for d in rule])
     return HttpResponse(html)
 
