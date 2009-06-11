@@ -57,6 +57,9 @@ body.orte #mainnav a.orte {
    background: url(/sitemedia/gfx/bigfulldrop.gif) left top no-repeat;
 }
 
+body.regulars #mainnav a.regulars { 
+   background: url(/sitemedia/gfx/bigfulldrop.gif) left top no-repeat;
+}
 
 /* content */ 
 div#content {

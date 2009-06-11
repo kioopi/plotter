@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from models import Termin
+from models import Termin, RecurringTermin
 from datetime import date
 
 
@@ -28,6 +28,8 @@ td = date.today()
 this_month_dict['year'] = td.year
 this_month_dict['month'] = td.month
 
+
+# ##########  patterns for display of  dates 
 urlpatterns = patterns('',
   # einzerlner termin
   # wird durch datum und slug identifiziert
@@ -51,8 +53,6 @@ urlpatterns = patterns('',
      termine_month_dict,
    ),
 
-
-
   # --------------------------------------------------
   # termine eines tages
   # es wird das gleiche template wie fuer das monatsarchiv verwendet 
@@ -73,7 +73,16 @@ urlpatterns = patterns('',
   ) 
 ) 
 
-# pattern for extending the admin interface 
+# ###################### patterns for recurring dates 
+urlpatterns += patterns('django.views.generic.list_detail',
+  url('^regulars/$', 'object_list',{ 
+      'queryset': RecurringTermin.objects.all(), 
+  }), 
+
+
+)
+
+# ################# patterns for extending the admin interface 
 urlpatterns += patterns('',
    # /termine/rules/12/preview/ 
    url(r'^rules/(?P<id>\d+)/preview/$',   

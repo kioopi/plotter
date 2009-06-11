@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block bodyclass %}regulars{% endblock %}
+
+
+{% block content %}
+
+<ul class="regulars">
+{% for object in object_list %}
+  <li>
+   {{ object.rule_description }}:<a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+  </li>
+{% endfor %}
+
+</ul>
+
+{% endblock %}
+

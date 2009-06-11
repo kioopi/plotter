@@ -1,5 +1,9 @@
     = 1.0 =
 
+
+      termine/recurring/models  
+         fix instance_creation      [] 
+
       termine/recurring/admin
          byweekday support          []
          byweekday js-interface     []
