@@ -189,6 +189,17 @@ class RecurringTermin(BaseTermin):
         )
         t.save()
 
+
+        # copy organizers to instance
+        for o in self.organizers.all():  
+           t.organizers.add(o) 
+
+        # copy cats to instance
+        for c in self.categories.all():  
+            t.categories.add(c) 
+        
+
+
         # set the 
         if not self.last_created or self.last_created.startdate < t.startdate:
             self.last_created = t
