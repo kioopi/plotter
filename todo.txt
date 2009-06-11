@@ -2,7 +2,7 @@
 
 
       termine/recurring/models  
-         fix instance_creation      [] 
+         fix instance_creation      [x] 
 
       termine/recurring/admin
          byweekday support          []

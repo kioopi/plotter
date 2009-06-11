@@ -6,9 +6,10 @@ Replace these with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from models import Termin 
+from models import Termin, RecurringTermin, WEEKLY, Category
 
 from datetime import datetime, date, time, timedelta
+import dateutil
 
 class TerminTest(TestCase):
     def setUp(self): 
@@ -54,6 +55,63 @@ class TerminTest(TestCase):
        
          
  
+class RecurringTerminTest(TestCase):
+     def setUp(self): 
+        self.rc = RecurringTermin(name="Monday Meeting", rule_description="Every Monday", frequency=WEEKLY, first_date=date(2009,6,8) )
+ 
+        self.rc.starttime = time(18,20)
+        self.rc.summary = "Monday Monday"
+        self.rc.save() 
+
+
+     def test_rrule(self):
+        """
+        Tests that a slug gets defined automaticly 
+        """
+        rr = dateutil.rrule.rrule(WEEKLY, dtstart=date(2009,6,8) )
+        for i in range(self.rc.rrule.count()): 
+	    self.failUnlessEqual(
+               self.rc.rrule[i],
+               rr[i] ) 
+
+     def test_instance_creation(self):  
+        """Make an instance of a RecurringTermin"""
+        day = date(2009,6,15) 
+        t = self.rc.create_instance(day) 
+	self.failUnlessEqual(t.summary, self.rc.summary) 
+	self.failUnlessEqual(t.startdatetime, datetime(2009,6,15,18,20)) 
+
+        # set the date to be 1h 10min long 
+        self.rc.duration = 70   
+        self.rc.save() 
+        t = self.rc.create_instance(day) 
+	self.failUnlessEqual(t.enddate, datetime(2009,6,15,19,30)) 
+
+     def test_copy_m2m_fields(self):  
+        """Test that categories in the recurringTermin are correctly copied over
+           to the instatiated Termin"""
+        cat1 = Category(name="Humpty") 
+        cat1.save() 
+        cat2 = Category(name="Dumpty") 
+        cat2.save() 
+       
+        self.rc.categories.add(cat1)  
+        self.rc.categories.add(cat2)  
+        self.rc.save() 
+
+        t = self.rc.create_instance(date(2009,6,15)) 
+        cats = list(t.categories.all()) 
+                  
+        self.assert_(cat1 in cats) 
+        self.assert_(cat2 in cats) 
+  
+       
+ 
+ 
+         
+        
+    
+            
  
 
 

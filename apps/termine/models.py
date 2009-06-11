@@ -178,17 +178,20 @@ class RecurringTermin(BaseTermin):
         """Takes a date-object and creates a instance (Termin) of this rule on this day""" 
           
         #FIXME maybe BaseTermin should be introspected here to DRY this out a little. 
+	enddate=datetime.combine(day, self.starttime)
+        if self.duration: 
+            enddate += timedelta(minutes=self.duration) 
+
         t = Termin( 
            summary = self.summary, 
            startdate=day,
            starttime=self.starttime,
-           enddate=datetime.combine(day, self.starttime) + timedelta(minutes=self.duration),
+           enddate=enddate,
            description=self.description,
            location=self.location,
            rule=self
         )
         t.save()
-
 
         # copy organizers to instance
         for o in self.organizers.all():  
@@ -205,8 +208,16 @@ class RecurringTermin(BaseTermin):
             self.last_created = t
             self.save() 
 
-    def rrule(self, end=False): 
+        t.save()
+        return t
+
+
+
+    def get_rrule(self, end=False): 
         """Returns an rrule object for this rule. """ 
+
+        # FIXME build a cacheing for the rrule 
+
         # kw-arguments for the object's constructor are collected in a dictionary
         kwargs = {}  
         
@@ -229,6 +240,7 @@ class RecurringTermin(BaseTermin):
 
         # TODO filtering by weekday goes here. 
         return rrule.rrule(int(self.frequency), **kwargs)
+    rrule = property(get_rrule) 
 
 
     def generate_dates(self):
