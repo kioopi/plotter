@@ -1,0 +1,48 @@
+    = 1.0 =
+
+      termine/recurring/admin
+         byweekday support          []
+         byweekday js-interface     []
+         add generate dates button  []
+
+      termine/recurring/
+         object_list                []
+         object_detail              []
+
+
+      locations/location/admin
+         map-based editing of lat/lon  []
+
+
+      organizers
+
+      links
+        build app                   []
+
+      sisters
+        build app (as special case of links?) []
+
+      about
+        direct_to_template          []
+
+      texts
+        build app                   []
+
+
+    = 2.0 =
+      print
+
+      user accounts
+      
+      text upload
+      
+      termine co
+
+      colab
+
+
+plotter brainstorm
+   - additional termin fields
+       - price?
+      
+   - comments?
