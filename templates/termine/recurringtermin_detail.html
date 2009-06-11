@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block bodyclass %}regulars{% endblock %}
+
+
+{% block content %}
+
+<div class="regulars">
+<h2>{{ object.name }}</h2> 
+<h3>{{ object.rule_description }}</h3> 
+
+        <ul>
+        {% for org in object.organizers.all %}
+          <li>
+           <a href="{{ org.get_absolute_url}}">{{ org.name }}</a>
+          </li>
+         {% endfor %}
+        </ul>
+
+
+<h4>Termine:</h4>
+   <ul>
+   {% for termin in object.instances.all %}
+     <li>
+     {{ termin.startdate|date:"d.m.Y" }} - <a href="{{ termin.get_absolute_url }}">{{ termin.summary }}</a>
+     </li>
+   {% endfor %}
+   </ul>
+
+
+</div>
+
+{% endblock %}
+

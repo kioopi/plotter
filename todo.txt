@@ -10,8 +10,8 @@
          add generate dates button  []
 
       termine/recurring/
-         object_list                []
-         object_detail              []
+         object_list                [x]
+         object_detail              [x]
 
 
       locations/location/admin

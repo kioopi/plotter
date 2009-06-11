@@ -170,6 +170,9 @@ class RecurringTermin(BaseTermin):
 
     def __unicode__(self):
         return self.name
+  
+    def get_absolute_url(self):  
+        return '/termine/regulars/%d/' % self.id 
 
     def create_instance(self, day):    
         """Takes a date-object and creates a instance (Termin) of this rule on this day""" 

@@ -78,6 +78,11 @@ urlpatterns += patterns('django.views.generic.list_detail',
   url('^regulars/$', 'object_list',{ 
       'queryset': RecurringTermin.objects.all(), 
   }), 
+  url('^regulars/(?P<object_id>\d+)/$', 'object_detail',{ 
+      'queryset': RecurringTermin.objects.all(), 
+      
+  }), 
+  
 
 
 )
