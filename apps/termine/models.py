@@ -276,10 +276,15 @@ class RecurringTermin(BaseTermin):
 
 
     def generate_dates(self):
-        """Creates upcoming instances for this rule.""" 
+        """Creates upcoming instances for this rule.
+            Returns a list with the created dates. Note: This is not a QuerySet""" 
+        termine = []  
         for d in self.rrule:
             d = datetime.date(d)
-            self.create_instance(d)
+            termine.append(self.create_instance(d)) 
+        return termine    
+        
+         
 
 
 

@@ -51,3 +51,33 @@ plotter brainstorm
        - price?
       
    - comments?
+
+
+interface improved: 
+   js-counting categories to display in cat-filter-interface
+
+
+
+Done: 
+    
+
+ Termine 
+    Normale Termine eintragen [x]
+    Termine auf der Website   [x]
+    
+ Regelmaessige Termine     
+    Anlegen der regeln        [x]
+      (die eingabeoberflaeche ist noch nicht besonders gut, funktioniert aber) 
+    Anlegen von Terminen nach den Regeln [x] 
+
+ 
+
+
+
+
+
+
+
+
+
+

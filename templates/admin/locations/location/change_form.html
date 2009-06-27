@@ -90,20 +90,25 @@ dojo.addOnLoad(function(){
 
    // document.getElementById('getnodes')
    dojo.connect(dojo.byId('getnodes'),'onclick', function(){
+
+     // TODO: dont pull nodes for large zooms.
      
-     // TODO if markers are in nodemarkers, remove em from the map and clear 
+     // TODO think about deleting only the markers that actually got pulled twic 
+     // delete the old markers
+     for(var i=0,j=nodemarkers.length; i<j; i++){ 
+        map.removeOverlay(nodemarkers[i]); 
+     } 
+     
 
      var bounds = map.getBounds();   
      var ne = bounds.getNorthEast(); 
      var sw = bounds.getSouthWest(); 
+     // get the nodes from osm. via server-proxy
      dojo.xhrGet({
          url : '/termine/getosmnodes/'+sw.lng()+','+sw.lat()+'-'+ne.lng()+','+ne.lat()+'/',
          handleAs:'xml',
          load : function(response, ioArgs) { 
 
-            //var xmlDoc = dojo.dom.createDocumentFromText(response); 
-            //var nodes = xmlDoc.getElementsByTagName("node"); 
-            
             var nodes = []; 
             var node;
             var xmlnodes = response.getElementsByTagName('node'); 
@@ -112,7 +117,8 @@ dojo.addOnLoad(function(){
                node = get_node_data(xmlnodes[i]); 
                marker =  make_node_marker(node); 
                map.addOverlay(marker); 
-               nodes.push(node); 
+               nodemarkers.push(marker);
+            //   nodes.push(node); 
             }  
             console.log(nodes);
          },
@@ -121,8 +127,6 @@ dojo.addOnLoad(function(){
          }
      });  
   }); 
-
-
 });
 
 </script> 

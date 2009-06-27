@@ -90,11 +90,20 @@ urlpatterns += patterns('django.views.generic.list_detail',
 # ################# patterns for extending the admin interface 
 urlpatterns += patterns('',
    # /termine/rules/12/preview/ 
+   # preview on the future dates of a rule
    url(r'^rules/(?P<id>\d+)/preview/$',   
     'apps.termine.adminviews.rule_preview', 
   ),
 
+   # /termine/rules/12/preview/ 
+   # preview on the future dates of a rule
+   url(r'^rules/(?P<id>\d+)/createdates/$',   
+    'apps.termine.adminviews.create_instances', 
+  ),
+
+
   # /termine/getosmnodes/50.343,6.123213,50.231,6.232/
+  # return osm-xml containing nodes for the bbox
    url(r'getosmnodes/([\d\.]+),([\d\.]+)-([\d\.]+),([\d\.]+)/',
       'apps.termine.adminviews.get_osm_nodes', 
    )

@@ -13,19 +13,36 @@ function byweekdaystr(){
 
 dojo.addOnLoad(function(){
 
+  var errfunc = function(response, ioArgs) {
+                 /* Handle any errors that occur here */
+                 var out = '<h3>Fehler</h3>' + response; 
+                 dojo.byId("dates-preview").innerHTML= out; 
+              };
+
+
   dojo.xhrGet({
     url : "/termine/rules/{{ object_id }}/preview/",
     load : function(response, ioArgs) {
         /* Handle a successful callback here */
         dojo.byId("dates-preview").innerHTML=response;
-    },
-    error : function(response, ioArgs) {
-        /* Handle any errors that occur here */
-        return response;
-    }
-  });
+        var createbtn = document.getElementById('create_dates'); 
+        dojo.connect(createbtn,'onclick', function(){
+          dojo.xhrGet({
+              url : "/termine/rules/{{ object_id }}/createdates/",
+              load : function(response, ioArgs) {
+                  dojo.byId("dates-preview").innerHTML=response + ' Termine angelgt.';
+              },
+              error : errfunc
+          });
 
-  
+       });
+    },
+    error : errfunc
+   });
+
+
+
+   
 
 });
 
@@ -39,7 +56,10 @@ dojo.addOnLoad(function(){
 {% if object_id %} 
   <h3>Termine Preview</h3> 
   <div id="dates-preview"></div>
+  <span class="button" id="create_dates" value="Termine Anlegen." />Termine Anlegen</span>
 
+
+<!--
   <li>
 <input type="checkbox" id="monday" name="" class="wd" value="MO"> Montag <br />
 <input type="checkbox" id="monday_1" name="" class="wdr" value="(1)"> Jeden ersten Mo <br />
@@ -47,6 +67,7 @@ dojo.addOnLoad(function(){
 <input type="checkbox" id="monday_3" name="" value="wdr" value="(3)"> Jeden dritten Mo <br />
 <input type="checkbox" id="monday-3" name="" value="wdr" value="(-1)"> Jeden letzten Mo <br />
   </li> 
+-->
 
 
 

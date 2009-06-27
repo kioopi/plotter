@@ -6,7 +6,6 @@ from models import Termin, Category, RecurringTermin
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 
-
 from urllib import urlopen 
 
 def rule_preview(request, id): 
@@ -25,7 +24,9 @@ def create_instances(request, id):
         return HttpResponseRedirect('/admin/')
 
     rt = get_object_or_404(RecurringTermin, pk = int(id))
-    rt.generate_dates() 
+    termine = rt.generate_dates() 
+    return HttpResponse(len(termine))
+    
 
 
 
