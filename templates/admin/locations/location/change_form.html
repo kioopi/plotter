@@ -87,10 +87,13 @@ dojo.addOnLoad(function(){
 
    var btn = dojo.byId('getnodes');
    var nodemarkers = []; 
+   var getnodes_running = false; 
 
    // document.getElementById('getnodes')
    dojo.connect(dojo.byId('getnodes'),'onclick', function(){
 
+     if(getnodes_running) return 0;   
+     getnodes_running = true; 
      // TODO: dont pull nodes for large zooms.
      
      // TODO think about deleting only the markers that actually got pulled twic 
@@ -121,8 +124,10 @@ dojo.addOnLoad(function(){
             //   nodes.push(node); 
             }  
             console.log(nodes);
+            getnodes_running = false; 
          },
          error : function(response, ioArgs) {
+           getnodes_running = false; 
            return response;
          }
      });  
