@@ -1,19 +1,29 @@
 {% extends "termine/termine.html" %}
 
-
 {% block content %}
-  <ul>
+  <ul id="terminelist">
   {% for object in object_list %} 
    <li class="termin"> 
      <div class="termin-header"> 
-     {% include "termine/termin_header.html" %} 
+        <div class="dtstart" title="">{{ object.startdate|date:"l" }} <span class="time">{{ object.starttime|time:"H:i" }}</span></div>
+
+        <a class="summary" href="{{ object.get_absolute_url }}">{{ object.summary }}</a>  
+        <div class="daynumber">{{ object.startdate|date:"d" }}</div>
+        <div style="clear:left;"></div>
+        <ul id="termininfo"> 
+           <li>&gt;&gt;<li> 
+         {% for cat in object.categories.all %}
+           <li>{{ cat.name }}</li>
+           <li>/</li>
+         {% endfor %}
+           <li><a class="location" href="{{ object.location.get_absolute_urls }}"> {{ object.location.name }} </a></li>
+           <li>/</li>
+         {% for org in object.organizers.all %}
+           <li><a href="{{ org.get_absolute_url}}">{{ org.name }}</a><li>
+           <li>/</li>
+         {% endfor %}
+        </ul> 
      </div> 
-
-   <p class="description">
-   </p> 
-   
-   {% include "termine/termin_footer.html" %} 
-
    </li> 
   {% endfor %} 
   </ul> 

@@ -182,6 +182,37 @@ ul li.termin {
 
 }
 
+ul li.termin .dtstart {
+  float:left; 
+  margin-right:0.5em;
+}
+
+ul li.termin .summary {
+  float:left; 
+  font-size:1.3em; 
+}
+
+ul li.termin #termininfo a {
+  display:inline;
+  text-decoration:none;
+
+  color:#993399;
+  
+}
+ul li.termin #termininfo li  {
+  float:left;
+
+  color:#993399;
+  margin-right:0.3em;
+   
+}
+
+ul li.termin #termininfo  {
+   margin-bottom:1em;
+}
+
+
+
 
 /* sidebar */
 
