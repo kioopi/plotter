@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 29
-/svn/!svn/ver/15/trunk/source
+/svn/!svn/ver/17/trunk/source
 END
 mxn.google.core.js
 K 25
@@ -13,7 +13,7 @@ mxn.cloudmade.core.js
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/12/trunk/source/mxn.cloudmade.core.js
+/svn/!svn/ver/16/trunk/source/mxn.cloudmade.core.js
 END
 mxn.yahoo.core.js
 K 25
@@ -31,7 +31,7 @@ mxn.microsoft.core.js
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/13/trunk/source/mxn.microsoft.core.js
+/svn/!svn/ver/17/trunk/source/mxn.microsoft.core.js
 END
 mxn.js
 K 25

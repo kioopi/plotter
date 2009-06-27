@@ -6,6 +6,11 @@
 
 {% if object_id %} 
 <script type="text/javascript">
+
+function byweekdaystr(){  
+   
+} 
+
 dojo.addOnLoad(function(){
 
   dojo.xhrGet({
@@ -34,6 +39,17 @@ dojo.addOnLoad(function(){
 {% if object_id %} 
   <h3>Termine Preview</h3> 
   <div id="dates-preview"></div>
+
+  <li>
+<input type="checkbox" id="monday" name="" class="wd" value="MO"> Montag <br />
+<input type="checkbox" id="monday_1" name="" class="wdr" value="(1)"> Jeden ersten Mo <br />
+<input type="checkbox" id="monday_2" name="" value="wdr" value="(2)"> Jeden zweiten Mo <br />
+<input type="checkbox" id="monday_3" name="" value="wdr" value="(3)"> Jeden dritten Mo <br />
+<input type="checkbox" id="monday-3" name="" value="wdr" value="(-1)"> Jeden letzten Mo <br />
+  </li> 
+
+
+
 {% endif %} 
 
 {{ object.name }} 

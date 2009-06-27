@@ -1,6 +1,6 @@
 
 == python libraries == 
-  * geopy 
+  * geopy  [http://code.google.com/p/geopy/] 
   * python-dateutil [http://labix.org/python-dateutil]
 
 

@@ -5,32 +5,118 @@
 {% block extrahead %} 
 
 <script type="text/javascript" src="/sitemedia/js/dojo/dojo.js"></script>  
-<script src="http://openlayers.org/api/OpenLayers.js"></script> 
-<script type="text/javascript" src="/sitemedia/js/mapstraction.js"></script>  
+<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAnfs7bKE82qgb3Zc2YyS-oBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSySz_REpPq-4WZA27OwgbtyR3VcA" type="text/javascript"></script>
 
 <script type="text/javascript">
 dojo.addOnLoad(function(){
 
+   // ABQIAAAAbc88W3VBivxJGYTgk4JYRBT7qFj2VXksPByc9OFqc_3MtbxN5RQx6w6sz54HXDnC4_UlsAEsTHnZiQ
 
-  
-
-  // the map 
-  var mapstraction = new Mapstraction('mapstraction','openlayers');
-  // get lat, lon 
-  var lat = parseFloat(document.getElementById('id_lat').value); 
-  var lon = parseFloat(document.getElementById('id_long').value); 
+   // get lat, lon 
+   var lat = parseFloat(document.getElementById('id_lat').value); 
+   var lon = parseFloat(document.getElementById('id_long').value); 
  
-  if( lat && lon ){
+   var osmurl = 'http://api.openstreetmap.org/api/0.5/';
+   var xapi = 'http://xapi.openstreetmap.org/api/0.5';
+   
+   var map = (function(){ 
+       if (!GBrowserIsCompatible()) return 0;
+       var copyOSM = new GCopyrightCollection("<a href=\"http://www.openstreetmap.org/\">OpenStreetMap</a>");
+       copyOSM.addCopyright(new GCopyright(1, new GLatLngBounds(new GLatLng(-90,-180), new GLatLng(90,180)), 0, " "));
 
-     var firstPoint = new LatLonPoint(lat,lon);
-     mapstraction.setCenterAndZoom(firstPoint, 15);
+       var tilesMapnik = new GTileLayer(copyOSM, 1, 17, {tileUrlTemplate: 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png'});
+       var tilesOsmarender = new GTileLayer(copyOSM, 1, 17, {tileUrlTemplate: 'http://tah.openstreetmap.org/Tiles/tile/{Z}/{X}/{Y}.png'});
 
-     // add marker
-     mapstraction.addMarker(new Marker(firstPoint)); 
+       var mapMapnik = new GMapType([tilesMapnik],     G_NORMAL_MAP.getProjection(), "Mapnik");
+       var mapOsmarender = new GMapType([tilesOsmarender], G_NORMAL_MAP.getProjection(), "Osmarend");
+       var map = new GMap2(document.getElementById("map"), { mapTypes: [mapMapnik, mapOsmarender] });
 
-     mapstraction.addEventListener('click', function(p) { alert('Mapstraction Event Handling - Mouse clicked at ' + p)  });
+       map.addControl(new GSmallMapControl());
+       map.addControl(new GMapTypeControl());
 
-  } 
+       if( lat && lon ){
+           var p =  new GLatLng(lat, lon);
+           map.setCenter(p ,15);
+           var marker = new GMarker(p, {draggable: true}); 
+           GEvent.addListener(marker, 'dragend', function(latlon){ 
+              document.getElementById('id_lat').value = latlon.lat();   
+              document.getElementById('id_long').value = latlon.lng();   
+           }); 
+           map.addOverlay(marker);
+
+       } 
+       return map; 
+   })(); 
+
+
+   var get_node_data = function(node){ 
+      nd = { lat:node.getAttribute('lat'), 
+             lon:node.getAttribute('lon'),
+             id:node.getAttribute('id'), } 
+      tags = node.getElementsByTagName('tag');      
+      for(var i=0,j=tags.length; i<j; i++){ 
+           nd[tags[i].getAttribute('k')] = tags[i].getAttribute('v');
+      } 
+      return nd; 
+   };
+
+   var make_node_marker = function(node){ 
+      // Create our "tiny" marker icon
+     var blueIcon = new GIcon(G_DEFAULT_ICON);
+     blueIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+     blueIcon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png"; 
+     var p = new GLatLng(node.lat, node.lon); 
+     var marker = new GMarker(p, {icon:blueIcon});  
+
+     GEvent.addListener(marker, "click", function() {
+        var html = "<b>" + (node.amenity || node.leisure) + "</b><br />"; 
+            if(node.name ) html += '"'+node.name+'"<br />';
+            html += 'OSM-ID: <a href="#">' + node.id + '</a><br /><br />';  
+            html += '<a href="#">Das ist es!</a>';  
+        map.openInfoWindowHtml(p, html);
+     });
+
+     return marker;
+       
+   };
+
+   var btn = dojo.byId('getnodes');
+   var nodemarkers = []; 
+
+   // document.getElementById('getnodes')
+   dojo.connect(dojo.byId('getnodes'),'onclick', function(){
+     
+     // TODO if markers are in nodemarkers, remove em from the map and clear 
+
+     var bounds = map.getBounds();   
+     var ne = bounds.getNorthEast(); 
+     var sw = bounds.getSouthWest(); 
+     dojo.xhrGet({
+         url : '/termine/getosmnodes/'+sw.lng()+','+sw.lat()+'-'+ne.lng()+','+ne.lat()+'/',
+         handleAs:'xml',
+         load : function(response, ioArgs) { 
+
+            //var xmlDoc = dojo.dom.createDocumentFromText(response); 
+            //var nodes = xmlDoc.getElementsByTagName("node"); 
+            
+            var nodes = []; 
+            var node;
+            var xmlnodes = response.getElementsByTagName('node'); 
+            for(var i=0,j=xmlnodes.length; i<j; i++){ 
+               //console.log(xmlnodes[i].getAttribute('lat')); 
+               node = get_node_data(xmlnodes[i]); 
+               marker =  make_node_marker(node); 
+               map.addOverlay(marker); 
+               nodes.push(node); 
+            }  
+            console.log(nodes);
+         },
+         error : function(response, ioArgs) {
+           return response;
+         }
+     });  
+  }); 
+
 
 });
 
@@ -41,7 +127,8 @@ dojo.addOnLoad(function(){
 
 {% block after_field_sets %}
 {% if object_id %} 
-  <div id="mapstraction" style="width: 600px; height: 200px; border:1px solid black;"></div>
+  <div id="map" style="width: 600px; height: 200px; border:1px solid black;"></div>
+ <span id="getnodes" style="cursor:pointer;">GET NODES</span>  
 {% endif %} 
 
 {{ object.name }} 

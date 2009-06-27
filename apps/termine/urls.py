@@ -92,5 +92,14 @@ urlpatterns += patterns('',
    # /termine/rules/12/preview/ 
    url(r'^rules/(?P<id>\d+)/preview/$',   
     'apps.termine.adminviews.rule_preview', 
-  ) 
+  ),
+
+  # /termine/getosmnodes/50.343,6.123213,50.231,6.232/
+   url(r'getosmnodes/([\d\.]+),([\d\.]+)-([\d\.]+),([\d\.]+)/',
+      'apps.termine.adminviews.get_osm_nodes', 
+   )
+
+
+
+
 )

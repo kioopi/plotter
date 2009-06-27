@@ -220,12 +220,17 @@ class RecurringTermin(BaseTermin):
 
         try: 
            # if weekday was a number 0=monday 
-           return getattr(rrule, WD_CONSTANTS(int(wstr))) 
+           return getattr(rrule, WD_CONSTANTS[int(wstr)]) 
         except ValueError: 
+           print 'cont + arg' 
            # if weekday came as constant with parameter MO(2) 
            wd, num = wstr.split('(') 
            num = int(num[:-1]) # cut off the last char  )  and convert to int
-           return getattr(rrule, wd.upper())(num)
+           #print '%s---[%d]' % (wd, num) 
+           obj = getattr(rrule, wd.upper())(num)
+           print ' -- ', obj
+           return obj
+ 
            
    
 
@@ -272,7 +277,7 @@ class RecurringTermin(BaseTermin):
 
     def generate_dates(self):
         """Creates upcoming instances for this rule.""" 
-        for d in self.rrule():
+        for d in self.rrule:
             d = datetime.date(d)
             self.create_instance(d)
 
