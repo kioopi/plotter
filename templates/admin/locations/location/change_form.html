@@ -62,19 +62,24 @@ dojo.addOnLoad(function(){
 
    var make_node_marker = function(node){ 
       // Create our "tiny" marker icon
-     var blueIcon = new GIcon(G_DEFAULT_ICON);
-     blueIcon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
-     blueIcon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png"; 
+     var nodeicon = new GIcon(G_DEFAULT_ICON);
+     nodeicon.image = "http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png";
+     nodeicon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png"; 
+     nodeicon.image = "/sitemedia/gfx/bwmarker.png"; 
+     nodeicon.shadow = "/sitemedia/gfx/bwmarker-s.png"; 
+     nodeicon.iconAnchor = new GPoint(16,16);
      var p = new GLatLng(node.lat, node.lon); 
-     var marker = new GMarker(p, {icon:blueIcon});  
+     var marker = new GMarker(p, {icon:nodeicon, title: node.amenity});  
+     var html = "<b>" + (node.amenity || node.leisure) + "</b><br />"; 
+     if(node.name ) html += '"'+node.name+'"<br />';
+     html += 'OSM-ID: <a href="http://www.openstreetmap.org/browse/node/'+node.id+'">' + node.id + '</a><br /><br />';  
+     html += '<a href="#">Das ist es!</a>';  
 
-     GEvent.addListener(marker, "click", function() {
-        var html = "<b>" + (node.amenity || node.leisure) + "</b><br />"; 
-            if(node.name ) html += '"'+node.name+'"<br />';
-            html += 'OSM-ID: <a href="#">' + node.id + '</a><br /><br />';  
-            html += '<a href="#">Das ist es!</a>';  
-        map.openInfoWindowHtml(p, html);
-     });
+     marker.bindInfoWindowHtml(html); 
+
+     //GEvent.addListener(marker, "click", function() {
+     //     map.openInfoWindowHtml(p, html);
+     //});
 
      return marker;
        

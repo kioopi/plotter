@@ -39,6 +39,7 @@ def get_osm_nodes(request, left, bottom, right, top):
     url = urltemplate % (left,bottom,right,top)
    
     # FIXME needs a check if server's on and call successful
+    # TODO cache results from osm to keep load off their servers
     xmldata = urlopen( url ).read() 
     print 
     print url

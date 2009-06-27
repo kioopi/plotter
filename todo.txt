@@ -1,11 +1,10 @@
     = 1.0 =
 
-
       termine/recurring/models  
          fix instance_creation      [x] 
 
       termine/recurring/admin
-         byweekday support          []
+         byweekday support          [x]
          byweekday js-interface     []
          add generate dates button  []
 
@@ -13,12 +12,14 @@
          object_list                [x]
          object_detail              [x]
 
-
       locations/location/admin
-         map-based editing of lat/lon  []
-
+         map-based editing of lat/lon  [x]
+         add field for osm-node-id     []
 
       organizers
+
+      termine 
+        feeds                       []  
 
       links
         build app                   []
