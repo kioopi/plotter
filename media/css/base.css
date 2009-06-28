@@ -100,7 +100,7 @@ div#content {
   color:#993399;
 } 
 
-.termin .dtstart { 
+.termin .dtstart{ 
   color:#993399;
   font-size:1.3em; 
   font-weight:bold;
@@ -111,7 +111,15 @@ div#content {
   font-weight:normal;
 }
 
-.termin .summary { 
+.termin .rule { 
+  color:#993399;
+  font-size:1.1em; 
+  font-weight:bold;
+  margin-bottom:0.7em; 
+
+} 
+
+.termin .summary, .termin h2 { 
   color:white;
   font-size:1.6em; 
   font-weight:bold;
@@ -225,6 +233,7 @@ ul li.termin #termininfo  {
   margin-bottom:3em;
 }
 
+  /* infoboxes */
 #sidebar .info div { 
   margin:0.8em; 
 } 
@@ -237,22 +246,37 @@ ul li.termin #termininfo  {
   -moz-border-radius-topright:1em;
   -moz-border-radius-bottomleft:1em;
   -moz-border-radius-bottomright:1em;
-/
 } 
 
-#sidebar .catlist { 
+
+  /* catlist */
+#sidebar .catlist, #sidebar .datelist { 
    padding:0;
    margin-left:1em; 
 }
-#sidebar .catlist li { 
+#sidebar .catlist li{ 
    padding:0;
    margin:0; 
 }
 
-#sidebar .catlist a { 
+#sidebar .catlist a, #sidebar .datelist a { 
    color:#993399;
    text-decoration:none;
 } 
+
+  /* datelist */
+#sidebar .datelist li {
+  background:#cabfe1; 
+  padding:0.2em;
+  margin:0.2em; 
+}
+ #sidebar .datelist a { 
+   color:white;
+   text-decoration:none;
+} 
+
+
+
 
 /* calendar */ 
 .month_cal  { 

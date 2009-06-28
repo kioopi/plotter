@@ -66,9 +66,13 @@ Done:
     Termine auf der Website   [x]
     
  Regelmaessige Termine     
-    Anlegen der regeln        [x]
-      (die eingabeoberflaeche ist noch nicht besonders gut, funktioniert aber) 
+    Anlegen der Regeln        [x]
+      (die eingaboberflaeche ist noch nicht besonders gut, funktioniert aber) 
     Anlegen von Terminen nach den Regeln [x] 
+      Das anlegen von neuen Terminen muss anestossen werden.
+
+    
+
 
  
 

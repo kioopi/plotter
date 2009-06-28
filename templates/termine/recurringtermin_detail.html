@@ -5,30 +5,45 @@
 
 {% block content %}
 
-<div class="regulars">
-<h2>{{ object.name }}</h2> 
-<h3>{{ object.rule_description }}</h3> 
-
-        <ul>
-        {% for org in object.organizers.all %}
-          <li>
-           <a href="{{ org.get_absolute_url}}">{{ org.name }}</a>
-          </li>
+<div class="regular termin">
+  
+    <div class="termin-header">
+       <h2>{{ object.name }}</h2>     
+       <div class="rule">{{ object.rule_description }}</div> 
+       <ul class="categories">
+         {% for cat in object.categories.all %}
+         <li>{{ cat.name }}</li>
          {% endfor %}
-        </ul>
+       </ul>
 
 
-<h4>Termine:</h4>
+    </div>
+ <p class="description"> 
+ {{ object.description }} 
+ </p> 
+
+ {% include "termine/termin_footer.html" %}
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block sidebar %} 
+  <li class="info"><div>Die n&auml;chsten Termine.</div></li> 
+  <li class="datelist"> 
    <ul>
    {% for termin in object.instances.all %}
      <li>
-     {{ termin.startdate|date:"d.m.Y" }} - <a href="{{ termin.get_absolute_url }}">{{ termin.summary }}</a>
+     <a href="{{ termin.get_absolute_url }}">{{ termin.startdatetime|date:"d.m.Y - H:i" }}</a>
      </li>
    {% endfor %}
    </ul>
 
 
-</div>
-
-{% endblock %}
+  </li>
+{% endblock %} 
 
