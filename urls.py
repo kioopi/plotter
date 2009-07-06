@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'^termine/', include('plotter2010.apps.termine.urls')),
     (r'^gruppen/', include('plotter2010.apps.organizers.urls')),
     (r'^orte/', include('plotter2010.apps.locations.urls')),
+    (r'^texte/', include('plotter2010.apps.texts.urls')),
 )
 
 from django.conf import settings

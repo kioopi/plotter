@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block bodyclass %}texte{% endblock %}
+
+{% block content %}
+
+<div class="location">
+   <div class="location-header">
+      <h2>{{ object.title }}</h2>
+      <div>
+ {{ object.pubdate|date:"d.m.Y" }} - {{ object.author_name }}
+
+      </div>
+   </div>
+
+   <p class="desciption">{{ object.text }}</p>
+</div>
+
+
+
+
+{% endblock %} 

@@ -6,7 +6,7 @@
       termine/recurring/admin
          byweekday support          [x]
          byweekday js-interface     []
-         add generate dates button  []
+         add generate dates button  [x]
 
       termine/recurring/
          object_list                [x]
@@ -31,7 +31,7 @@
         direct_to_template          []
 
       texts
-        build app                   []
+        build app                   [x]
 
 
     = 2.0 =
@@ -55,28 +55,6 @@ plotter brainstorm
 
 interface improved: 
    js-counting categories to display in cat-filter-interface
-
-
-
-Done: 
-    
-
- Termine 
-    Normale Termine eintragen [x]
-    Termine auf der Website   [x]
-    
- Regelmaessige Termine     
-    Anlegen der Regeln        [x]
-      (die eingaboberflaeche ist noch nicht besonders gut, funktioniert aber) 
-    Anlegen von Terminen nach den Regeln [x] 
-      Das anlegen von neuen Terminen muss anestossen werden.
-
-    
-
-
- 
-
-
 
 
 

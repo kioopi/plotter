@@ -57,6 +57,11 @@ body.orte #mainnav a.orte {
    background: url(/sitemedia/gfx/bigfulldrop.gif) left top no-repeat;
 }
 
+body.texte #mainnav a.texte { 
+   background: url(/sitemedia/gfx/bigfulldrop.gif) left top no-repeat;
+}
+
+
 body.regulars #mainnav a.regulars { 
    background: url(/sitemedia/gfx/bigfulldrop.gif) left top no-repeat;
 }
@@ -69,16 +74,17 @@ div#content {
 } 
 
 /* termin detail */ 
-.termin, #termine { 
+.termin, #termine, div.location { 
    width:40em; 
    float:left;
 } 
 
-.termin-header {
+.termin-header, .location-header {
    background:  #c6b6db;
    padding: 0.1em 1em 1em 1em;
    position:relative;
    -moz-border-radius-topright:1.5em;
+ # color:#993399;
 } 
 .termin-header .daynumber{
    position:absolute;
@@ -119,7 +125,7 @@ div#content {
 
 } 
 
-.termin .summary, .termin h2 { 
+.termin .summary, .termin h2, .location h2 { 
   color:white;
   font-size:1.6em; 
   font-weight:bold;
@@ -132,14 +138,14 @@ div#content {
    display:block;
 }
 
-.termin .description {
+.termin .description, .location p {
   padding:2em 1em;
   background-color:white; 
   color:#333333;
   line-height:1.4em;
 }
 
-.termin .description:first-line {
+.termin .description:first-line, .location p:first-line {
   font-weight:bold;
 }
 
@@ -210,6 +216,7 @@ ul li.termin #termininfo a {
 ul li.termin #termininfo li  {
   float:left;
 
+  #display:inline;
   color:#993399;
   margin-right:0.3em;
    

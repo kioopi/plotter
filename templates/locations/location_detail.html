@@ -1,24 +1,39 @@
 {% extends "base.html" %} 
 
-{% block bodyclass %}gruppen{% endblock %}
+{% block bodyclass %}orte{% endblock %}
 
 {% block content %} 
 <div class="location"> 
-   <h2>{{ object.name }}</h2> 
-   <div class="adress"> 
-    </div>{{ object.adress }} </div>
-    <div>{{ object.zipcode }}, {{ object.city}} </div>
+   <div class="location-header"> 
+      <h2>{{ object.name }}</h2> 
+      <div class="adress"> 
+         {{ object.adress }} 
+        {{ object.zipcode }}, {{ object.city}} 
+      </div>
    </div>
   
-   <p>{{ object.text }}</p> 
-
-   <ul> 
-   {% for termin in object.upcoming_termine %} 
-     <li>
-     {{ termin.startdate|date:"d.m.Y" }} - <a href="{{ termin.get_absolute_url }}">{{ termin.summary }}</a> 
-     </li> 
-   {% endfor %} 
-   </ul> 
+   <p class="desciption">{{ object.text }}</p> 
 </div> 
 
 {% endblock %} 
+
+
+
+{% block sidebar %}
+<li class="info"><div>Die n&auml;chsten Termine.</div></li>
+
+<li class="datelist">
+<ul> 
+{% for termin in object.upcoming_termine %} 
+<li>
+    <a href="{{ termin.get_absolute_url }}">{{ termin.startdatetime|date:"d.m.Y" }} - {{ termin.summary }}</a>
+
+</li> 
+{% endfor %} 
+</ul> 
+
+
+
+  </li>
+{% endblock %}
+

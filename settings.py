@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'organizers',
     'locations', 
     'termine', 
+    'texts',
 )
 
 # now import local_settings, which are not under version-control.
