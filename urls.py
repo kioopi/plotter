@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     (r'^gruppen/', include('plotter2010.apps.organizers.urls')),
     (r'^orte/', include('plotter2010.apps.locations.urls')),
     (r'^texte/', include('plotter2010.apps.texts.urls')),
+    (r'^links/', include('plotter2010.apps.linklist.urls')),
 )
 
 from django.conf import settings

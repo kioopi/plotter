@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block bodyclass %}links{% endblock %}
+
+
+{% block content %}
+
+<ul class="locations">
+{% for object in object_list %}
+  <li>
+   {{ object.name }}
+  </li>
+{% endfor %}
+
+</ul>
+
+{% endblock %}
+
+
