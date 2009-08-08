@@ -24,9 +24,15 @@ class Category(models.Model):
 
 
 class Link(models.Model):
-    name = models.CharField(max_length=100)
     link = models.URLField() 
+    name = models.CharField(max_length=100, blank=True)
+    description = models.CharField(max_length=250, blank=True, default="")
     categories = models.ManyToManyField('Category', verbose_name="Kategorien")
 
     class Meta:
         ordering = ['name']
+
+    def __unicode__(self):
+        if self.name:  
+            return self.name
+        return self.link

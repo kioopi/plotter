@@ -227,7 +227,45 @@ ul li.termin #termininfo  {
 }
 
 
+/* linklist */ 
 
+ul.linklist>li {
+   background:  #c6b6db;
+   padding: 0.1em 1em 1em 1em;
+   position:relative;
+  -moz-border-radius-topleft:1em;
+  -moz-border-radius-topright:1em;
+  -moz-border-radius-bottomleft:1em;
+  -moz-border-radius-bottomright:0;
+  margin-bottom:1em;
+} 
+
+ul.linklist>li h3 { 
+  color:white;
+  display:block;
+  font-size:1.4em;
+  font-weight:bold;
+  margin-top:0.4em;
+  margin-left:0.7em;
+  margin-bottom:-0.2em;
+  text-decoration:none;
+}
+
+ul.linklist>li ul { 
+  background:white;
+  -moz-border-radius-topleft:1em;
+  -moz-border-radius-topright:1em;
+  -moz-border-radius-bottomleft:1em;
+  -moz-border-radius-bottomright:0;
+  padding: 1em 1em 1em 1em;
+   
+}
+
+ul.linklist>li a{ 
+  color:#993399;
+  font-weight:bold; 
+  text-decoration:none;
+}
 
 /* sidebar */
 

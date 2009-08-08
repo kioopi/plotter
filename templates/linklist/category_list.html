@@ -5,15 +5,33 @@
 
 {% block content %}
 
-<ul class="locations">
+<ul class="linklist">
 {% for object in object_list %}
-  <li>
-   {{ object.name }}
+  <li id="cat_{{ object.name|lower }}">
+   <h3>{{ object.name }}</h3>
+     <ul>
+      {% for link in object.link_set.all %} 
+      <li> 
+         <a href="{{ link.link }}">{{ link.name }}</a>  {{ link.description }} 
+      </li> 
+      {% endfor %} 
+     </ul> 
   </li>
 {% endfor %}
-
 </ul>
 
 {% endblock %}
+
+{% block sidebar %} 
+<li> 
+<ul class="catlist"> 
+{% for object in object_list %}
+   <li><a href="#cat_{{ object.name|lower }}">_{{ object.name|lower }}</a></li>
+
+{% endfor %}
+</ul>
+   
+</li>
+{% endblock sidebar %}
 
 
