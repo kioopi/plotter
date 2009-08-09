@@ -4,20 +4,11 @@
   <ul id="terminelist">
   {% for object in object_list %} 
    <li class="termin"> 
-
-{% ifchanged object.startdate %} 
      <div class="termin-header"> 
-        <div class="dtstart" title="">{{ object.startdate|date:"l" }}</div>
-
-        <div class="daynumber">{{ object.startdate|date:"d" }}</div>
-        <div style="clear:left;"></div>
-     </div> 
-{% endifchanged %}
-<div class="termin-body">
-        <span class="time">{{ object.starttime|time:"H:i" }}</span>
-
+        <div class="dtstart" title="">{{ object.startdate|date:"l" }} <span class="time">{{ object.starttime|time:"H:i" }}</span></div>
 
         <a class="summary" href="{{ object.get_absolute_url }}">{{ object.summary }}</a>  
+        <div class="daynumber">{{ object.startdate|date:"d" }}</div>
         <div style="clear:left;"></div>
         <ul id="termininfo"> 
            <li>&gt;&gt;<li> 
@@ -38,10 +29,7 @@
            {% endif %} 
          {% endfor %}
         </ul> 
-        <div style="clear:left;"></div>
-</div> 
-{% ifchanged object.startdate %} 
-{% endifchanged %}
+     </div> 
    </li> 
   {% endfor %} 
   </ul> 

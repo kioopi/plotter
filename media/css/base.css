@@ -192,18 +192,31 @@ div.termin-meta#meta_two {
 /* termin liste */ 
 
 ul li.termin {
-  margin: 1em 0; 
 
+}
+
+ul li.termin .termin-header { 
+  margin-top: 1em;
 }
 
 ul li.termin .dtstart {
-  float:left; 
   margin-right:0.5em;
 }
 
-ul li.termin .summary {
-  float:left; 
+
+ul li.termin .time {
+  float:left;
   font-size:1.3em; 
+  color:#993399;
+}
+
+ul li.termin .summary {
+  float:left;
+  font-size:1.3em; 
+  font-weight:normal;
+  margin-left:0.3em;
+  color:#333;
+  
 }
 
 ul li.termin #termininfo a {
@@ -225,6 +238,13 @@ ul li.termin #termininfo li  {
 ul li.termin #termininfo  {
    margin-bottom:1em;
 }
+
+ul li.termin .termin-body {
+   margin:0;
+   background: white; 
+   padding:1em;
+
+} 
 
 
 /* linklist */ 
