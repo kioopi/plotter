@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block bodyclass %}texte{% endblock %}
+
+{% block content %}
+
+<ul class="linklist">
+{% for object in latest %}
+  {% ifchanged object.pubdate.month %} 
+  <li>
+  <h3>{{ object.pubdate|date:"M.Y" }}</h3>
+  <ul> 
+  {% endifchanged %} 
+  <li>  
+   <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+   {{ object.pubdate|date:"d.m.Y" }} - {{ object.author_name }} 
+  </li>
+  {% ifchanged objecti.pubdate.month %} 
+  </ul> 
+  {% endifchanged %} 
+ 
+{% endfor %}
+</ul>
+{% endblock %} 

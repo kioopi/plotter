@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+
+{% block bodyclass %}orte{% endblock %}
+
+
+{% block content %} 
+
+<ul class="linklist">
+{% for object in object_list %}
+  <li id="city_{{ object.name|lower }}">
+   <h3>{{ object.name }}</h3>
+     <ul>
+      {% for loc in object.location_set.all %}
+      {% if loc.display_in_list %} 
+      <li>
+         <a href="{{ loc.get_absolute_url }}">{{ loc.name }}</a>  {{ loc.adress }}
+      </li>
+      {% endif %} 
+      {% endfor %}
+     </ul>
+  </li>
+{% endfor %}
+</ul>
+
+
+
+{% endblock %} 
+
+
+{% block sidebar %}
+<li>
+<ul class="catlist">
+{% for object in object_list %}
+   <li><a href="#city_{{ object.name|lower }}">_{{ object.name|lower }}</a></li>
+
+{% endfor %}
+</ul>
+
+</li>
+{% endblock sidebar %}
+

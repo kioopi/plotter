@@ -22,7 +22,7 @@
         feeds                       []  
 
       links
-        build app                   []
+        build app                   [x]
 
       sisters
         build app (as special case of links?) []

@@ -66,6 +66,10 @@ body.regulars #mainnav a.regulars {
    background: url(/sitemedia/gfx/bigfulldrop.gif) left top no-repeat;
 }
 
+body.links #mainnav a.links { 
+   background: url(/sitemedia/gfx/bigfulldrop.gif) left top no-repeat;
+}
+
 /* content */ 
 div#content {
    clear:both;
