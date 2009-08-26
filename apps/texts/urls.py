@@ -3,18 +3,12 @@ from models import Text
 
 
 info = {
-    'queryset': Text.online_objects.filter(),
+    'queryset': Text.online_objects.all(),
 }
 
 
 urlpatterns = patterns('django.views.generic.list_detail',
-#   url(
-#       r'^$',
-#       'object_list',
-#       info ,
-#       name='text_list'
-#   ),
-   url(
+  url(
        r'^(?P<slug>[-\w]+)/$',
        'object_detail',
        info,
@@ -29,7 +23,7 @@ dinfo = {
     'num_latest': 20, 
 }
 
-urlpatterns = patterns('django.views.generic.date_based',
+urlpatterns += patterns('django.views.generic.date_based',
    url(
        r'^$',
        'archive_index',
