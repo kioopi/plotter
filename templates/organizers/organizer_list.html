@@ -5,13 +5,20 @@
 
 {% block content %} 
 
-<ul class="organizers"> 
+
+<ul class="linklist"><li> 
+  <h3>Gruppen</h3> 
+<ul> 
 {% for object in object_list %} 
   <li> 
    <a href="{{ object.get_absolute_url }}">{{ object.name }}</a> 
   </li> 
 {% endfor %} 
-
 </ul> 
+
+
+
+</li></ul>
+
 
 {% endblock %} 

@@ -179,6 +179,9 @@ class RecurringTermin(BaseTermin):
         """Takes a date-object and creates a instance (Termin) of this rule on this day""" 
           
         #FIXME maybe BaseTermin should be introspected here to DRY this out a little. 
+
+        #FIXME:  starttime and duration are not required cause 
+        # trouble if not provided 
 	enddate=datetime.combine(day, self.starttime)
         if self.duration: 
             enddate += timedelta(minutes=self.duration) 
