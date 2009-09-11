@@ -33,6 +33,10 @@
       texts
         build app                   [x]
 
+      groups 
+        rebuild templates           [] 
+
+
 
     = 2.0 =
       print

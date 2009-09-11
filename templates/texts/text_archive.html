@@ -15,7 +15,7 @@
    <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
    {{ object.pubdate|date:"d.m.Y" }} - {{ object.author_name }} 
   </li>
-  {% ifchanged objecti.pubdate.month %} 
+  {% ifchanged object.pubdate.month %} 
   </ul> 
   {% endifchanged %} 
  
