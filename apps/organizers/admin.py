@@ -6,7 +6,7 @@ class OrganizerAdmin(admin.ModelAdmin):
     list_display=('name',)
     search_fields=('name','description','url' )
     fieldsets=(
-       (None, {'fields': ('name', 'slug', 'description')}),
+       (None, {'fields': ('name', 'slug', 'description', 'url')}),
      #  ('Kontaktdaten', {'fields': ('url', 'email', 'phone', 'location')}),
      #  (None, {'fields': ('show_in_list',)}),
     )
