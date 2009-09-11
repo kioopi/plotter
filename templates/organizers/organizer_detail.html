@@ -3,17 +3,30 @@
 {% block bodyclass %}gruppen{% endblock %}
 
 {% block content %} 
-<div class="organizer"> 
-   <h2>{{ object.name }}</h2> 
-   <p>{{ object.text }}</h2> 
+<div class="location"> 
 
-   <ul> 
-   {% for termin in object.upcoming_termine %} 
-     <li>
-     {{ termin.startdate|date:"d.m.Y" }} - <a href="{{ termin.get_absolute_url }}">{{ termin.summary }}</a> 
-     </li> 
-   {% endfor %} 
-   </ul> 
+  <div class="location-header"> 
+   <h2>{{ object.name }}</h2> 
+   {% if object.url %} 
+   <a href="{{ object.url }}">{{ object.url }}</a>  
+   {% endif %} 
+  </div>
+   <p>{{ object.description }}</p> 
 </div> 
 
+
 {% endblock %} 
+{% block sidebar %}
+<li class="info"><div>Die n&auml;chsten Termine.</div></li>
+
+<li class="datelist">
+<ul>
+{% for termin in object.upcoming_termine %}
+<li>
+    <a href="{{ termin.get_absolute_url }}">{{ termin.startdatetime|date:"d.m.Y" }} - {{ termin.summary }}</a>
+</li>
+{% endfor %}
+</ul>
+
+</li>
+{% endblock %}
