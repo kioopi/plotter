@@ -34,7 +34,7 @@
         build app                   [x]
 
       groups 
-        rebuild templates           [] 
+        rebuild templates           [x] 
 
 
 
