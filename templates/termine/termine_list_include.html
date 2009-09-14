@@ -1,0 +1,17 @@
+<li class="newdatelist">
+  <h3>Die n&auml;chsten Termine</h3>
+  <ul>
+    {% for termin in termine %}
+    <li class="{% cycle "pare" "impare" %}" >
+      <div class="date">
+        <span class="month">{{ termin.startdatetime|date:"N" }}</span>
+        <span class="day">{{ termin.startdatetime|date:"d" }}</span>
+        <span class="year">{{ termin.startdatetime|date:"Y" }}</span>
+      </div> 
+      <a href="{{ termin.get_absolute_url }}">{{ termin.summary }}</a>
+      <div class="clear"></div>
+    </li>
+    {% endfor %}
+  </ul>
+</li>
+

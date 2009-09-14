@@ -81,8 +81,6 @@ def month_cal(year, month, cat=None):
 
 register.inclusion_tag('termine/calendar.html')(month_cal)
 
-
-
 def catlist(year, month, day=None): 
     if day: 
         datestr = '%s-%s-%s' % (year, month, day) 
@@ -91,3 +89,8 @@ def catlist(year, month, day=None):
     object_list = Category.objects.all()  
     return {'object_list': object_list, 'datestr': datestr } 
 register.inclusion_tag('termine/catlist.html')(catlist) 
+
+
+def terminelist(termine, title='Die n&auml;chsten Termine'): 
+   return {'termine':termine, 'title': title } 
+register.inclusion_tag('termine/termine_list_include.html')(terminelist) 

@@ -298,7 +298,7 @@ ul.linklist>li a{
    float:left;
 }
 
-#sidebar li { 
+#sidebar>li { 
   margin-bottom:3em;
 }
 
@@ -333,17 +333,93 @@ ul.linklist>li a{
    text-decoration:none;
 } 
 
+
+.newdatelist { 
+  background:white; 
+  -moz-border-radius-topleft:0;
+  -moz-border-radius-topright:1em;
+  -moz-border-radius-bottomleft:1em;
+  -moz-border-radius-bottomright:1em;
+  margin-left:1em;
+} 
+
+.newdatelist h3 { 
+   padding:0.4em 1em;  
+   color:  #993399;
+   font-size:1em;
+   font-weight:normal;
+  
+}
+
+.newdatelist ul li {
+  margin:0; 
+} 
+
+.newdatelist ul li a {
+  color:#993399; 
+  text-decoration:none;
+  display:block;
+  margin-left:0.5em;
+  padding-bottom:0.5em;
+  font-size:1.1em;
+}
+
+.newdatelist ul li.pare {
+  background:#cabfe1; 
+} 
+
+.newdatelist ul li.impare {
+  background:white; 
+}
+
+.newdatelist ul li.pare a {
+  color:  white;
+}
+
+
+
+#sidebar .newdatelist div.date { 
+  color: #993399;
+  overflow:hidden;
+  display:block;
+  padding:0.3em;
+
+/*
+  border:1px solid #993399;
+  -moz-border-radius-topleft:0;
+  -moz-border-radius-topright:1em;
+  -moz-border-radius-bottomleft:1em;
+  -moz-border-radius-bottomright:1em;
+*/
+} 
+
+#sidebar .newdatelist .date .month { 
+  font-size:0.7em;
+ // display:block; 
+}
+
+#sidebar .newdatelist .date .day { 
+  font-size:0.7em;
+ // display:block; 
+  text-align:center;
+}
+
+#sidebar .newdatelist .date .year { 
+  font-size:0.7em;
+ // display:block; 
+}
+
   /* datelist */
 #sidebar .datelist li {
   background:#cabfe1; 
   padding:0.2em;
   margin:0.2em; 
 }
- #sidebar .datelist a { 
+#sidebar .datelist a { 
    color:white;
    text-decoration:none;
+   
 } 
-
 
 
 
