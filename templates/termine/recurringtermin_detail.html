@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load termine_tags %}
 
 {% block bodyclass %}regulars{% endblock %}
 
@@ -33,17 +34,6 @@
 
 
 {% block sidebar %} 
-  <li class="info"><div>Die n&auml;chsten Termine.</div></li> 
-  <li class="datelist"> 
-   <ul>
-   {% for termin in object.instances.all %}
-     <li>
-     <a href="{{ termin.get_absolute_url }}">{{ termin.startdatetime|date:"d.m.Y - H:i" }}</a>
-     </li>
-   {% endfor %}
-   </ul>
-
-
-  </li>
+{% terminelist object.instances.all %}
 {% endblock %} 
 

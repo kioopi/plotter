@@ -1,4 +1,5 @@
 {% extends "base.html" %} 
+{% load termine_tags %}
 
 {% block bodyclass %}orte{% endblock %}
 
@@ -14,26 +15,9 @@
   
    <p class="desciption">{{ object.text }}</p> 
 </div> 
-
 {% endblock %} 
 
-
-
 {% block sidebar %}
-<li class="info"><div>Die n&auml;chsten Termine.</div></li>
-
-<li class="datelist">
-<ul> 
-{% for termin in object.upcoming_termine %} 
-<li>
-    <a href="{{ termin.get_absolute_url }}">{{ termin.startdatetime|date:"d.m.Y" }} - {{ termin.summary }}</a>
-
-</li> 
-{% endfor %} 
-</ul> 
-
-
-
-  </li>
+{% terminelist object.upcoming_termine %}
 {% endblock %}
 
