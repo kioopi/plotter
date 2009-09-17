@@ -44,5 +44,3 @@ def day(request, **kwargs):
         queryset = queryset.filter(categories__slug=cat)
 	kwargs["extra_context"]["cat"] = Category.objects.get(slug=cat) 
     return archive_day(request, year, month, day, queryset, date_field, **kwargs)  
-
-

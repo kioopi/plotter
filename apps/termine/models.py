@@ -287,8 +287,3 @@ class RecurringTermin(BaseTermin):
             d = datetime.date(d)
             termine.append(self.create_instance(d)) 
         return termine    
-        
-         
-
-
-
