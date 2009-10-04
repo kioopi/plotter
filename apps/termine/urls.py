@@ -74,13 +74,10 @@ urlpatterns = patterns('',
 ) 
 
 # ###################### patterns for recurring dates 
-urlpatterns += patterns('django.views.generic.list_detail',
-  url('^regulars/$', 'object_list',{ 
+urlpatterns += patterns('',
+  url('^regulars/$', 'termine.views.recurring_dates_list'), 
+  url('^regulars/(?P<object_id>\d+)/$', 'django.views.generic.list_detail.object_detail',{ 
       'queryset': RecurringTermin.objects.all(), 
-  }), 
-  url('^regulars/(?P<object_id>\d+)/$', 'object_detail',{ 
-      'queryset': RecurringTermin.objects.all(), 
-      
   }), 
   
 

@@ -1,4 +1,5 @@
-from models import Termin, Category
+from models import Termin, Category, RecurringTermin
+from django.shortcuts import get_object_or_404, render_to_response
 
 from django.views.generic.date_based import  archive_month, archive_day  
 
@@ -44,3 +45,18 @@ def day(request, **kwargs):
         queryset = queryset.filter(categories__slug=cat)
 	kwargs["extra_context"]["cat"] = Category.objects.get(slug=cat) 
     return archive_day(request, year, month, day, queryset, date_field, **kwargs)  
+
+def recurring_dates_list(request):  
+    """Groups RecurringTermin objects by weekday. This should be really easy with the ORM but i didn't figure out how."""
+    regs = RecurringTermin.objects.all() 
+    weekdays = {} 
+    for reg in regs:
+        weekdays.setdefault(reg.get_weekday_display(), []).append(reg) 
+    return  render_to_response('termine/recurringtermin_list.html', {
+        'weekdays': weekdays,     
+        }
+    )
+    
+
+
+

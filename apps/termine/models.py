@@ -132,6 +132,18 @@ FREQ_CHOICES = (
   ( DAILY, 'Taeglich'),
 )
 
+(NO,MON,TUE,WED,THU,FRI,SAT,SUN) = range(8)  
+WEEKDAY_CHOICES = (
+  (NO, 'Keine Zuordnung'),
+  (MON, 'Montag'),
+  (TUE, 'Dienstag'),
+  (WED, 'Mittwoch'),
+  (THU, 'Donnerstag'),
+  (FRI, 'Freitag'),
+  (SAT, 'Samstag'),
+  (SUN, 'Sonntag'),
+) 
+
 class RecurringTermin(BaseTermin): 
     """A rule for reccuring dates. from this model actual dates (Termin) can be instatiated.
     
@@ -142,6 +154,9 @@ class RecurringTermin(BaseTermin):
     # a plain text description of the rule 
     # "Jeden Sonntag um 11.00 Uhr"  
     rule_description = models.CharField(max_length=200)
+
+    # choice of weekday for grouping 
+    weekday = models.IntegerField(verbose_name='Zuordnung', default=0, choices=WEEKDAY_CHOICES)
 
     # repetition frequency of the recurring date 
     frequency = models.IntegerField(choices=FREQ_CHOICES, max_length=10)

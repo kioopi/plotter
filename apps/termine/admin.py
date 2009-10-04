@@ -22,7 +22,7 @@ class RecurringTerminAdmin(admin.ModelAdmin):
     list_display = ('name','rule_description' )
     search_fields = ('name', 'summary', 'description')
     fieldsets = (
-      (None, {'fields':('name','rule_description')}),
+      (None, {'fields':('name','rule_description', 'weekday')}),
       ('Rule', {'fields':('frequency', 'first_date', 'interval', 'byweekday')}),
       ('Creation', {'fields':('createdelta',)}),
       (None, {'fields': ('starttime', 'duration', 'summary',)}),
