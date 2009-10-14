@@ -10,8 +10,9 @@ class Migration:
         # Adding model 'Link'
         db.create_table('linklist_link', (
             ('id', orm['linklist.Link:id']),
-            ('name', orm['linklist.Link:name']),
             ('link', orm['linklist.Link:link']),
+            ('name', orm['linklist.Link:name']),
+            ('description', orm['linklist.Link:description']),
         ))
         db.send_create_signal('linklist', ['Link'])
         
@@ -53,9 +54,10 @@ class Migration:
         },
         'linklist.link': {
             'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['linklist.Category']"}),
+            'description': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '250', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'})
         }
     }
     

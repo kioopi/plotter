@@ -9,49 +9,50 @@ class Migration:
         
         # Adding model 'RecurringTermin'
         db.create_table('termine_recurringtermin', (
-            ('id', models.AutoField(primary_key=True)),
-            ('starttime', models.TimeField("Uhrzeit", null=True, blank=True)),
-            ('summary', models.CharField("Titel", max_length=250, unique_for_date='startdate')),
-            ('description', models.TextField("Text", blank=True)),
-            ('location', models.ForeignKey(orm['locations.Location'], null=True, blank=True)),
-            ('owner', models.ForeignKey(orm['auth.User'], null=True, blank=True)),
-            ('created', models.DateTimeField(auto_now_add=True)),
-            ('modified', models.DateTimeField(auto_now=True)),
-            ('name', models.CharField(max_length=100)),
-            ('rule_description', models.CharField(max_length=200)),
-            ('frequency', models.IntegerField(max_length=10)),
-            ('first_date', models.DateField()),
-            ('interval', models.IntegerField(default=1)),
-            ('byweekday', models.CharField(max_length=20, blank=True)),
-            ('duration', models.IntegerField('Dauer', null=True, blank=True)),
-            ('createdelta', models.IntegerField(default=14)),
-            ('last_created', models.ForeignKey(orm.Termin, related_name="latest_instance", null=True, blank=True)),
+            ('id', orm['termine.RecurringTermin:id']),
+            ('starttime', orm['termine.RecurringTermin:starttime']),
+            ('summary', orm['termine.RecurringTermin:summary']),
+            ('description', orm['termine.RecurringTermin:description']),
+            ('location', orm['termine.RecurringTermin:location']),
+            ('owner', orm['termine.RecurringTermin:owner']),
+            ('created', orm['termine.RecurringTermin:created']),
+            ('modified', orm['termine.RecurringTermin:modified']),
+            ('name', orm['termine.RecurringTermin:name']),
+            ('rule_description', orm['termine.RecurringTermin:rule_description']),
+            ('weekday', orm['termine.RecurringTermin:weekday']),
+            ('frequency', orm['termine.RecurringTermin:frequency']),
+            ('first_date', orm['termine.RecurringTermin:first_date']),
+            ('interval', orm['termine.RecurringTermin:interval']),
+            ('byweekday', orm['termine.RecurringTermin:byweekday']),
+            ('duration', orm['termine.RecurringTermin:duration']),
+            ('createdelta', orm['termine.RecurringTermin:createdelta']),
+            ('last_created', orm['termine.RecurringTermin:last_created']),
         ))
         db.send_create_signal('termine', ['RecurringTermin'])
         
         # Adding model 'Termin'
         db.create_table('termine_termin', (
-            ('id', models.AutoField(primary_key=True)),
-            ('starttime', models.TimeField("Uhrzeit", null=True, blank=True)),
-            ('summary', models.CharField("Titel", max_length=250, unique_for_date='startdate')),
-            ('description', models.TextField("Text", blank=True)),
-            ('location', models.ForeignKey(orm['locations.Location'], null=True, blank=True)),
-            ('owner', models.ForeignKey(orm['auth.User'], null=True, blank=True)),
-            ('created', models.DateTimeField(auto_now_add=True)),
-            ('modified', models.DateTimeField(auto_now=True)),
-            ('startdate', models.DateField("Datum")),
-            ('enddate', models.DateTimeField("Enddatum und Uhrzeit", null=True, blank=True)),
-            ('slug', models.SlugField(unique_for_date='startdate')),
-            ('rule', models.ForeignKey(orm.RecurringTermin, related_name="instances", null=True, blank=True)),
-            ('publish', models.BooleanField("Veroeffentlichen", default=True)),
+            ('id', orm['termine.Termin:id']),
+            ('starttime', orm['termine.Termin:starttime']),
+            ('summary', orm['termine.Termin:summary']),
+            ('description', orm['termine.Termin:description']),
+            ('location', orm['termine.Termin:location']),
+            ('owner', orm['termine.Termin:owner']),
+            ('created', orm['termine.Termin:created']),
+            ('modified', orm['termine.Termin:modified']),
+            ('startdate', orm['termine.Termin:startdate']),
+            ('enddate', orm['termine.Termin:enddate']),
+            ('slug', orm['termine.Termin:slug']),
+            ('rule', orm['termine.Termin:rule']),
+            ('publish', orm['termine.Termin:publish']),
         ))
         db.send_create_signal('termine', ['Termin'])
         
         # Adding model 'Category'
         db.create_table('termine_category', (
-            ('id', models.AutoField(primary_key=True)),
-            ('name', models.CharField(max_length=100)),
-            ('slug', models.SlugField()),
+            ('id', orm['termine.Category:id']),
+            ('name', orm['termine.Category:name']),
+            ('slug', orm['termine.Category:slug']),
         ))
         db.send_create_signal('termine', ['Category'])
         
@@ -111,64 +112,113 @@ class Migration:
     
     
     models = {
-        'auth.user': {
-            '_stub': True,
-            'id': ('models.AutoField', [], {'primary_key': 'True'})
+        'auth.group': {
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '80', 'unique': 'True'}),
+            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'blank': 'True'})
         },
-        'organizers.organizer': {
-            'Meta': {'ordering': "['name']"},
-            '_stub': True,
-            'id': ('models.AutoField', [], {'primary_key': 'True'})
+        'auth.permission': {
+            'Meta': {'unique_together': "(('content_type', 'codename'),)"},
+            'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        'auth.user': {
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
+            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'blank': 'True'}),
+            'username': ('django.db.models.fields.CharField', [], {'max_length': '30', 'unique': 'True'})
+        },
+        'contenttypes.contenttype': {
+            'Meta': {'unique_together': "(('app_label', 'model'),)", 'db_table': "'django_content_type'"},
+            'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
+        },
+        'locations.city': {
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'lat': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'}),
+            'long': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'db_index': 'True'}),
+            'text': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
         },
         'locations.location': {
-            '_stub': True,
-            'id': ('models.AutoField', [], {'primary_key': 'True'})
+            'adress': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
+            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['locations.City']"}),
+            'display_in_list': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'lat': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'}),
+            'long': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
+            'text': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'zipcode': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'})
         },
-        'termine.termin': {
-            'Meta': {'ordering': "['startdate','starttime','location','slug']", 'get_latest_by': "'startdate'"},
-            'categories': ('models.ManyToManyField', ["orm['termine.Category']"], {'blank': 'True'}),
-            'created': ('models.DateTimeField', [], {'auto_now_add': 'True'}),
-            'description': ('models.TextField', ['"Text"'], {'blank': 'True'}),
-            'enddate': ('models.DateTimeField', ['"Enddatum und Uhrzeit"'], {'null': 'True', 'blank': 'True'}),
-            'id': ('models.AutoField', [], {'primary_key': 'True'}),
-            'location': ('models.ForeignKey', ["orm['locations.Location']"], {'null': 'True', 'blank': 'True'}),
-            'modified': ('models.DateTimeField', [], {'auto_now': 'True'}),
-            'organizers': ('models.ManyToManyField', ["orm['organizers.Organizer']"], {'blank': 'True'}),
-            'owner': ('models.ForeignKey', ["orm['auth.User']"], {'null': 'True', 'blank': 'True'}),
-            'publish': ('models.BooleanField', ['"Veroeffentlichen"'], {'default': 'True'}),
-            'rule': ('models.ForeignKey', ["orm['termine.RecurringTermin']"], {'related_name': '"instances"', 'null': 'True', 'blank': 'True'}),
-            'slug': ('models.SlugField', [], {'unique_for_date': "'startdate'"}),
-            'startdate': ('models.DateField', ['"Datum"'], {}),
-            'starttime': ('models.TimeField', ['"Uhrzeit"'], {'null': 'True', 'blank': 'True'}),
-            'summary': ('models.CharField', ['"Titel"'], {'max_length': '250', 'unique_for_date': "'startdate'"})
-        },
-        'termine.recurringtermin': {
-            'Meta': {'ordering': "['name']"},
-            'byweekday': ('models.CharField', [], {'max_length': '20', 'blank': 'True'}),
-            'categories': ('models.ManyToManyField', ["orm['termine.Category']"], {'blank': 'True'}),
-            'created': ('models.DateTimeField', [], {'auto_now_add': 'True'}),
-            'createdelta': ('models.IntegerField', [], {'default': '14'}),
-            'description': ('models.TextField', ['"Text"'], {'blank': 'True'}),
-            'duration': ('models.IntegerField', ["'Dauer'"], {'null': 'True', 'blank': 'True'}),
-            'first_date': ('models.DateField', [], {}),
-            'frequency': ('models.IntegerField', [], {'max_length': '10'}),
-            'id': ('models.AutoField', [], {'primary_key': 'True'}),
-            'interval': ('models.IntegerField', [], {'default': '1'}),
-            'last_created': ('models.ForeignKey', ["orm['termine.Termin']"], {'related_name': '"latest_instance"', 'null': 'True', 'blank': 'True'}),
-            'location': ('models.ForeignKey', ["orm['locations.Location']"], {'null': 'True', 'blank': 'True'}),
-            'modified': ('models.DateTimeField', [], {'auto_now': 'True'}),
-            'name': ('models.CharField', [], {'max_length': '100'}),
-            'organizers': ('models.ManyToManyField', ["orm['organizers.Organizer']"], {'blank': 'True'}),
-            'owner': ('models.ForeignKey', ["orm['auth.User']"], {'null': 'True', 'blank': 'True'}),
-            'rule_description': ('models.CharField', [], {'max_length': '200'}),
-            'starttime': ('models.TimeField', ['"Uhrzeit"'], {'null': 'True', 'blank': 'True'}),
-            'summary': ('models.CharField', ['"Titel"'], {'max_length': '250', 'unique_for_date': "'startdate'"})
+        'organizers.organizer': {
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '150', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'location': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['locations.Location']", 'null': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
+            'tel': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),
+            'url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
         },
         'termine.category': {
-            'Meta': {'ordering': "['name']"},
-            'id': ('models.AutoField', [], {'primary_key': 'True'}),
-            'name': ('models.CharField', [], {'max_length': '100'}),
-            'slug': ('models.SlugField', [], {})
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'})
+        },
+        'termine.recurringtermin': {
+            'byweekday': ('django.db.models.fields.CharField', [], {'max_length': '20', 'blank': 'True'}),
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['termine.Category']", 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'createdelta': ('django.db.models.fields.IntegerField', [], {'default': '14'}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'duration': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'first_date': ('django.db.models.fields.DateField', [], {}),
+            'frequency': ('django.db.models.fields.IntegerField', [], {'max_length': '10'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'interval': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'last_created': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'latest_instance'", 'blank': 'True', 'null': 'True', 'to': "orm['termine.Termin']"}),
+            'location': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['locations.Location']", 'null': 'True', 'blank': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'organizers': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['organizers.Organizer']", 'blank': 'True'}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'rule_description': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'starttime': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
+            'summary': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
+            'weekday': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+        },
+        'termine.termin': {
+            'categories': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['termine.Category']", 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'enddate': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'location': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['locations.Location']", 'null': 'True', 'blank': 'True'}),
+            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'organizers': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['organizers.Organizer']", 'blank': 'True'}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
+            'publish': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
+            'rule': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'instances'", 'blank': 'True', 'null': 'True', 'to': "orm['termine.RecurringTermin']"}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'db_index': 'True'}),
+            'startdate': ('django.db.models.fields.DateField', [], {}),
+            'starttime': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
+            'summary': ('django.db.models.fields.CharField', [], {'max_length': '250'})
         }
     }
     
