@@ -4,12 +4,18 @@ from django.template.defaultfilters import slugify
 import datetime
 from django.conf import settings
 
+from locations.models import Location
+
 class Organizer(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField()
-
     description = models.TextField('Text', blank=True)
     url = models.URLField(blank=True, null=True) 
+
+    email = models.EmailField(max_length=150, blank=True)
+    tel = models.CharField(max_length=20, blank=True)
+
+    location = models.ForeignKey(Location, blank=True, null=True)
 
     def upcoming_termine(self):
         return self.termin_set.filter(startdate__gte=datetime.date.today()).filter(publish=True)

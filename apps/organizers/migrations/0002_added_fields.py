@@ -6,27 +6,11 @@ from organizers.models import *
 class Migration:
     
     def forwards(self, orm):
-        
-        # Adding model 'Organizer'
-        db.create_table('organizers_organizer', (
-            ('id', orm['organizers.Organizer:id']),
-            ('name', orm['organizers.Organizer:name']),
-            ('slug', orm['organizers.Organizer:slug']),
-            ('description', orm['organizers.Organizer:description']),
-            ('url', orm['organizers.Organizer:url']),
-            ('email', orm['organizers.Organizer:email']),
-            ('tel', orm['organizers.Organizer:tel']),
-            ('location', orm['organizers.Organizer:location']),
-        ))
-        db.send_create_signal('organizers', ['Organizer'])
-        
+        "Write your forwards migration here"
     
     
     def backwards(self, orm):
-        
-        # Deleting model 'Organizer'
-        db.delete_table('organizers_organizer')
-        
+        "Write your backwards migration here"
     
     
     models = {
