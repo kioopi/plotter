@@ -82,13 +82,13 @@ class Location(models.Model):
        verbose_name="Ort"
        verbose_name_plural="Orte"
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False):
         """Saves the Location and takes care that there is a slug"""
         if not self.slug:
            self.slug = slugify(self.name)
         if not self.lat:
            self.geocode()
-        super(Location, self).save()
+        super(Location, self).save(force_insert, force_update)
 
     def __unicode__(self):
         return self.name
