@@ -19,9 +19,9 @@
 
 
     </div>
- <p class="description"> 
- {{ object.description }} 
- </p> 
+ <div class="description"> 
+ {{ object.description|linebreaks }} 
+ </div> 
 
  {% include "termine/termin_footer.html" %}
 
