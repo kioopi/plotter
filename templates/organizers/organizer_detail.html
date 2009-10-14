@@ -12,7 +12,23 @@
    <a href="{{ object.url }}">{{ object.url }}</a>  
    {% endif %} 
   </div>
-   <p>{{ object.description }}</p> 
+   <p>{{ object.description|linebreaks }}</p> 
+
+   <div class="termin-meta" id="meta_one">
+     <div class="meta-sock"> 
+       <a class="location" href="{{ object.location.get_absolute_urls }}">{{ object.location.name }}</a>
+       <div>{{ object.location.adress }} </div>
+       <div>{{ object.location.zipcode }}, {{ object.location.city}} </div>
+    </div>
+   </div>
+   <div class="termin-meta" id="meta_two">
+     <div class="meta-sock"> 
+     </div>
+   </div>
+
+
+
+
 </div> 
 {% endblock %} 
 

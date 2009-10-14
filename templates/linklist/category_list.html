@@ -12,7 +12,7 @@
      <ul>
       {% for link in object.link_set.all %} 
       <li> 
-         <a href="{{ link.link }}">{{ link.name }}</a>  {{ link.description }} 
+         <a href="{{ link.link }}">{{ link.name }}</a>  {{ link.description|linebreaks }}
       </li> 
       {% endfor %} 
      </ul> 

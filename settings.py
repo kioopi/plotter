@@ -65,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'plotter2010.urls'
@@ -86,7 +87,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.flatpages',
     'django_extensions',
+    'debug_toolbar',
     'south', 
+
     'organizers',
     'locations', 
     'termine', 

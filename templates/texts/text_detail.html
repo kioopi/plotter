@@ -9,14 +9,8 @@
       <h2>{{ object.title }}</h2>
       <div>
  {{ object.pubdate|date:"d.m.Y" }} - {{ object.author_name }}
-
       </div>
    </div>
-
-   <p class="desciption">{{ object.text }}</p>
+   <div class="desciption">{{ object.text|linebreaks }}</div>
 </div>
-
-
-
-
 {% endblock %} 
