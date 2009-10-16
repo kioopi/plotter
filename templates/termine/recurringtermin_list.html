@@ -12,7 +12,7 @@
     <ul>
       {% for reg in regs %}
       <li>
-        {{ reg.rule_description }}:<a href="{{ reg.get_absolute_url }}">{{ reg.name }}</a>
+        {{ reg.rule_description }}: <a href="{{ reg.get_absolute_url }}">{{ reg.name }}</a>
       </li>
       {% endfor %}
     </ul>

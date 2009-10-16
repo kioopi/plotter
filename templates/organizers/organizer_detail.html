@@ -23,6 +23,12 @@
    </div>
    <div class="termin-meta" id="meta_two">
      <div class="meta-sock"> 
+     {% for rule in object.recurringtermin_set.all %}
+       <div>
+       <a href="{{ rule.get_absolute_url }}">{{ rule.name }}</a> ({{ rule.rule_description }}) 
+       </div>
+     {% endfor %} 
+     
      </div>
    </div>
 

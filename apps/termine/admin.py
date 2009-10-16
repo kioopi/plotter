@@ -2,7 +2,7 @@ from django.contrib import admin
 from models import Category, Termin, RecurringTermin
 
 class TerminAdmin(admin.ModelAdmin):
-    list_display = ('summary','startdate', 'publish')
+    list_display = ('summary','startdate', 'publish', '_rule_description')
     list_display_links = ('summary', 'startdate') 
     list_editable = ('publish',) 
     list_filter = ('startdate', 'publish')

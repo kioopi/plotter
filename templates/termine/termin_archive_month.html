@@ -37,6 +37,7 @@
            <li>/</li>
            {% endif %} 
          {% endfor %}
+           {% if object.rule %}<li>{{ object.rule.rule_description }}</li>{% endif %}
         </ul> 
         <div style="clear:left;"></div>
 </div> 

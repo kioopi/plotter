@@ -98,6 +98,13 @@ class Termin(BaseTermin):
             return datetime.combine(self.startdate, time(0,0))
     startdatetime = property(_get_startdatetime) 
 
+    def _rule_description(self): 
+        if self.rule: 
+            return self.rule.rule_description 
+        else: 
+            return u''
+    _rule_description.short_description = 'Wiederholt sich'
+
     def save(self):
         """Saves the Date and takes care that there is a slug"""
         if not self.slug:
@@ -182,6 +189,8 @@ class RecurringTermin(BaseTermin):
 
     class Meta:
         ordering = ['name']
+        verbose_name = 'Regelmaessiger Termin'
+        verbose_name_plural = 'Regelmaessige Termine'
 
 
     def __unicode__(self):

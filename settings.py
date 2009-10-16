@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'plotter2010.urls'
@@ -96,6 +96,10 @@ INSTALLED_APPS = (
     'texts',
     'linklist',
 )
+
+DEBUG_TOOLBAR_CONFIG = {
+         'INTERCEPT_REDIRECTS': False,
+}
 
 # now import local_settings, which are not under version-control.
 # see http://mccormac.org/blog/2007/mar/28/localized-settings-django/

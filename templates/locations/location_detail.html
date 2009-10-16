@@ -14,7 +14,38 @@
    </div>
   
    <p class="desciption">{{ object.text }}</p> 
+
+
+
+
+
+<div class="termin-meta" id="meta_one">
+  <div class="meta-sock">
+   {% for org in object.organizer_set.all %}
+     <div>
+       <a href="{{ org.get_absolute_url }}">{{ org.name }}</a> 
+     </div>
+{% endfor %} 
+
+  </div>
+</div>
+<div class="termin-meta" id="meta_two">
+   <div class="meta-sock">
+   {% for rule in object.recurringtermin_set.all %}
+     <div>
+       <a href="{{ rule.get_absolute_url }}">{{ rule.name }}</a> ({{ rule.rule_description }})
+     </div>
+{% endfor %} 
+   </div>
+</div>
+
+
+
+
+
+
 </div> 
+
 {% endblock %} 
 
 {% block sidebar %}
