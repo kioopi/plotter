@@ -28,7 +28,7 @@
            {% endif %} 
          {% endfor %}
          {% if object.location %} 
-           <li><a class="location" href="{{ object.location.get_absolute_urls }}"> {{ object.location.name }} </a></li>
+           <li><a class="location" href="{{ object.location.get_absolute_url }}"> {{ object.location.name }} </a></li>
            <li>/</li>
          {% endif %} 
          {% for org in object.organizers.all %}
